@@ -1,6 +1,6 @@
 namespace MyOnlineShop.Domain.Ordering.Models.Orders
 {
-    using MyOnlineShop.Domain.Common;
+    using MyOnlineShop.Domain.Common.Models;
 
     public class OrderItem : Entity<int>
     {

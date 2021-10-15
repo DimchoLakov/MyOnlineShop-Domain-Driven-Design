@@ -2,6 +2,7 @@
 {
     using MyOnlineShop.Domain.Catalog.Models.Categories;
     using MyOnlineShop.Domain.Common;
+    using MyOnlineShop.Domain.Common.Models;
 
     using System;
     using System.Collections.Generic;

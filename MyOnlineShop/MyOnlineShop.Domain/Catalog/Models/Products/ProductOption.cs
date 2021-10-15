@@ -1,6 +1,6 @@
 ﻿namespace MyOnlineShop.Domain.Catalog.Models.Products
 {
-    using MyOnlineShop.Domain.Common;
+    using MyOnlineShop.Domain.Common.Models;
 
     public class ProductOption : Entity<int>
     {
