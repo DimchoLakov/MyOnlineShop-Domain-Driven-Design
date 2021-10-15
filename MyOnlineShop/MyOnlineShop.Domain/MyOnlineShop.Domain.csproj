@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Identity\" />
+    <Folder Include="Ordering\Events\" />
+    <Folder Include="Ordering\Exceptions\" />
+    <Folder Include="Ordering\Factories\" />
+    <Folder Include="Ordering\Repositories\" />
+    <Folder Include="Ordering\Specifications\" />
+    <Folder Include="Payments\" />
+    <Folder Include="Catalog\Factories\" />
+    <Folder Include="Catalog\Events\" />
+    <Folder Include="Catalog\Exceptions\" />
+    <Folder Include="Catalog\Specifications\" />
+    <Folder Include="Catalog\Repositories\" />
+    <Folder Include="ShoppingCart\" />
+  </ItemGroup>
+
+</Project>
