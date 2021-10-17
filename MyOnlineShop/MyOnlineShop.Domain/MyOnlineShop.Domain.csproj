@@ -16,7 +16,6 @@
     <Folder Include="Payments\" />
     <Folder Include="Catalog\Factories\" />
     <Folder Include="Catalog\Events\" />
-    <Folder Include="Catalog\Exceptions\" />
     <Folder Include="Catalog\Specifications\" />
     <Folder Include="Catalog\Repositories\" />
     <Folder Include="ShoppingCart\" />
