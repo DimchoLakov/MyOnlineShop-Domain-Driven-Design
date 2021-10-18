@@ -13,6 +13,7 @@
     public class Product : Entity<int>, IAggregateRoot
     {
         private readonly List<Category> categories;
+        private readonly List<ProductOption> options;
 
         internal Product(
             string name,
@@ -52,6 +53,7 @@
             this.DateCreated = DateTime.Now;
 
             this.categories = new List<Category>();
+            this.options = new List<ProductOption>();
         }
 
         public string Name { get; private set; }
@@ -82,6 +84,8 @@
 
         public IReadOnlyCollection<Category> Categories => this.categories.AsReadOnly();
 
+        public IReadOnlyCollection<ProductOption> Options => this.options.AsReadOnly();
+
         private void Validate(
             string name,
             string description,
@@ -100,6 +104,119 @@
             this.ValidateImageUrl(imageUrl);
             this.ValidateStockAvailable(stockAvailable);
             this.ValidateMaxStock(maxStock);
+        }
+
+        public Product AddCategory(Category category)
+        {
+            this.categories.Add(category);
+
+            return this;
+        }
+
+        public Product RemoveCategory(Category category)
+        {
+            this.categories.Remove(category);
+         
+            return this;
+        }
+
+        public Product AddOption(string name, decimal? price)
+        {
+            this.options.Add(new ProductOption(name, price));
+
+            return this;
+        }
+
+        public Product RemoveOption(ProductOption option)
+        {
+            this.options.Remove(option);
+
+            return this;
+        }
+
+        public Product UpdateName(string name)
+        {
+            this.ValidateName(name);
+            this.Name = name;
+
+            return this;
+        }
+
+        public Product UpdateDescription(string description)
+        {
+            this.ValidateDescription(description);
+            this.Description = description;
+
+            return this;
+        }
+
+        public Product UpdatePrice(decimal price)
+        {
+            this.ValidatePrice(price);
+            this.Price = price;
+
+            return this;
+        }
+
+        public Product UpdateWeight(double weight)
+        {
+            this.ValidateWeight(weight);
+            this.Weight = weight;
+
+            return this;
+        }
+
+        public Product UpdateCode(string code)
+        {
+            this.ValidateCode(code);
+            this.Code = code;
+
+            return this;
+        }
+
+        public Product UpdateImageUrl(string imageUrl)
+        {
+            this.ValidateImageUrl(imageUrl);
+            this.ImageUrl = imageUrl;
+
+            return this;
+        }
+
+        public Product UpdateStockAvailable(int stockAvailable)
+        {
+            this.ValidateStockAvailable(stockAvailable);
+            this.StockAvailable = stockAvailable;
+
+            return this;
+        }
+
+        public Product UpdateMaxStock(int maxStock)
+        {
+            this.ValidateMaxStock(maxStock);
+            this.MaxStock = maxStock;
+
+            return this;
+        }
+
+        public Product UpdateType(ProductType type)
+        {
+            this.Type = type;
+
+            return this;
+        }
+
+        public Product UpdateIsOnSale(bool isOnSale)
+        {
+            this.IsOnSale = isOnSale;
+
+            return this;
+        }
+
+        public Product UpdateIsArchived(bool isArchived)
+        {
+            this.IsArchived = isArchived;
+
+            return this;
         }
 
         private void ValidateName(string name)

@@ -1,7 +1,7 @@
-using MyOnlineShop.Domain.Common.Models;
-
 namespace MyOnlineShop.Domain.Ordering.Models.Orders
 {
+    using MyOnlineShop.Domain.Common.Models;
+
     public class OrderStatus : Enumeration
     {
         public static OrderStatus Pending = new OrderStatus(1, nameof(Pending));

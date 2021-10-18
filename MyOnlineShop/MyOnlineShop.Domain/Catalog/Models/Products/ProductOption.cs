@@ -22,6 +22,22 @@
 
         public decimal? Price { get; private set; }
 
+        public ProductOption UpdateName(string name)
+        {
+            this.ValidateName(name);
+            this.Name = name;
+
+            return this;
+        }
+
+        public ProductOption UpdatePrice(decimal price)
+        {
+            this.ValidatePrice(price);
+            this.Price = price;
+
+            return this;
+        }
+
         private void ValidateName(string name)
         {
             Guard.ForStringLength<InvalidProductOptionException>(name, NameMinLength, NameMaxLength, nameof(this.Name));
