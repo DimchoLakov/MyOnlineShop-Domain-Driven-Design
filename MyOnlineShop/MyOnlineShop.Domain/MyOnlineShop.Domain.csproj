@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Catalog\Repositories\Categories\" />
     <Folder Include="Identity\" />
     <Folder Include="Ordering\Events\" />
     <Folder Include="Ordering\Exceptions\" />
@@ -16,8 +17,12 @@
     <Folder Include="Payments\" />
     <Folder Include="Catalog\Events\" />
     <Folder Include="Catalog\Specifications\" />
-    <Folder Include="Catalog\Repositories\" />
     <Folder Include="ShoppingCart\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
+    <PackageReference Include="Scrutor" Version="3.3.0" />
   </ItemGroup>
 
 </Project>
