@@ -14,7 +14,6 @@
     <Folder Include="Ordering\Repositories\" />
     <Folder Include="Ordering\Specifications\" />
     <Folder Include="Payments\" />
-    <Folder Include="Catalog\Factories\" />
     <Folder Include="Catalog\Events\" />
     <Folder Include="Catalog\Specifications\" />
     <Folder Include="Catalog\Repositories\" />
