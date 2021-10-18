@@ -1,4 +1,4 @@
-﻿namespace MyOnlineShop.Domain.Catalog.Factories
+﻿namespace MyOnlineShop.Domain.Catalog.Factories.Categories
 {
     using MyOnlineShop.Domain.Catalog.Exceptions.Categories;
     using MyOnlineShop.Domain.Catalog.Models.Categories;
