@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace MyOnlineShop.Application.Mapping
+namespace MyOnlineShop.Application.Common.Mapping
 {
     public interface IMapFrom<T>
     {

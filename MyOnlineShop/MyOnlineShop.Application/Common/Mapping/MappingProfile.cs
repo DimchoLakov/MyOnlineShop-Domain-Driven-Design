@@ -1,4 +1,4 @@
-﻿namespace MyOnlineShop.Application.Mapping
+﻿namespace MyOnlineShop.Application.Common.Mapping
 {
     using AutoMapper;
     using System;
