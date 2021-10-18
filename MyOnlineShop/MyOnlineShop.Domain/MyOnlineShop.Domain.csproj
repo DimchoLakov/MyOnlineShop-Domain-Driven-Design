@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Catalog\Repositories\Categories\" />
     <Folder Include="Identity\" />
     <Folder Include="Ordering\Events\" />
     <Folder Include="Ordering\Exceptions\" />
