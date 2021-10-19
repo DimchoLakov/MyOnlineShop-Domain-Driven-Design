@@ -7,7 +7,7 @@
 
     public class ProductOption : Entity<int>
     {
-        public ProductOption(
+        internal ProductOption(
             string name,
             decimal? price)
         {
