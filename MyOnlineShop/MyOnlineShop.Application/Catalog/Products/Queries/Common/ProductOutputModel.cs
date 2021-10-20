@@ -5,7 +5,7 @@
 
     public class ProductOutputModel : IMapFrom<Product>
     {
-        public string Name { get; private set; } = default!:
+        public string Name { get; private set; } = default!;
 
         public string Description { get; private set; } = default!;
         
