@@ -6,7 +6,7 @@
     public abstract class SortOrder<TEntity>
     {
         public const string Ascending = "asc";
-        public const string Desceding = "desc";
+        public const string Descending = "desc";
         
         protected SortOrder(string? sortBy, string? order)
         {
