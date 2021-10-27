@@ -2,11 +2,10 @@
 {
     using System;
     using System.Text.RegularExpressions;
+    using static Constants.Common;
 
     public static class Guard
     {
-        private const int MaxUrlLength = 2048;
-
         public static void AgainstEmptyString<TException>(string value, string name = "Value")
             where TException : BaseDomainException, new()
         {
