@@ -2,7 +2,10 @@
 {
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
+    using MyOnlineShop.Domain.Catalog.Models.Categories;
+    using MyOnlineShop.Domain.Catalog.Models.Products;
     using MyOnlineShop.Domain.Common.Models;
+    using MyOnlineShop.Infrastructure.Catalog;
     using MyOnlineShop.Infrastructure.Common.Events;
     using MyOnlineShop.Infrastructure.Identity;
     using System.Collections.Generic;
@@ -11,7 +14,8 @@
     using System.Threading;
     using System.Threading.Tasks;
 
-    internal class MyOnlineShopDbContext : IdentityDbContext<User>
+    internal class MyOnlineShopDbContext : IdentityDbContext<User>, 
+        ICatalogDbContext
     {
         private readonly IEventDispatcher eventDispatcher;
         private readonly Stack<object> saveChangesTracker;
@@ -23,6 +27,12 @@
             this.eventDispatcher = eventDispatcher;
             this.saveChangesTracker = new Stack<object>();
         }
+
+        public DbSet<Product> Products { get; set; } = default!;
+
+        public DbSet<ProductOption> ProductOptions { get; set; } = default!;
+
+        public DbSet<Category> Categories { get; set; } = default!;
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
