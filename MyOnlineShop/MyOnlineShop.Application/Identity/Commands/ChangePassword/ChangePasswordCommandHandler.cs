@@ -2,6 +2,7 @@
 {
     using MediatR;
     using MyOnlineShop.Application.Common;
+    using MyOnlineShop.Application.Common.Contracts;
     using System.Threading;
     using System.Threading.Tasks;
 

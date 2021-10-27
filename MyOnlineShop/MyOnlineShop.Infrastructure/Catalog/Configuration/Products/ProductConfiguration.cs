@@ -6,7 +6,7 @@
     using static MyOnlineShop.Domain.Catalog.Models.ModelConstants.Product;
     using static MyOnlineShop.Domain.Common.Constants.Common;
 
-    public class ProductConfiguration : IEntityTypeConfiguration<Product>
+    internal class ProductConfiguration : IEntityTypeConfiguration<Product>
     {
         public void Configure(EntityTypeBuilder<Product> builder)
         {

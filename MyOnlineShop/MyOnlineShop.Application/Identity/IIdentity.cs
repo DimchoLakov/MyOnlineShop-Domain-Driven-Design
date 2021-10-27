@@ -3,13 +3,14 @@
     using MyOnlineShop.Application.Common;
     using MyOnlineShop.Application.Identity.Commands;
     using MyOnlineShop.Application.Identity.Commands.ChangePassword;
+    using MyOnlineShop.Application.Identity.Commands.CreateUser;
     using System.Threading.Tasks;
 
     public interface IIdentity
     {
-        Task<Result> Register(UserInputModel userInput);
+        Task<Result> Register(CreateUserInputModel userInput);
 
-        Task<Result> Login(UserInputModel userInput);
+        Task<Result<string>> Login(UserInputModel userInput);
 
         Task<Result> ChangePassword(ChangePasswordInputModel changePasswordInput);
     }

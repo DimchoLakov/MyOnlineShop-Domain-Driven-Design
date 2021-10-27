@@ -6,7 +6,7 @@
     using static MyOnlineShop.Domain.Common.Constants.Common;
     using static MyOnlineShop.Domain.Catalog.Models.ModelConstants.Category;
 
-    public class CategoryConfiguration : IEntityTypeConfiguration<Category>
+    internal class CategoryConfiguration : IEntityTypeConfiguration<Category>
     {
         public void Configure(EntityTypeBuilder<Category> builder)
         {

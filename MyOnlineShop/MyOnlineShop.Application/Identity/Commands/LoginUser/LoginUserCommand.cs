@@ -3,7 +3,7 @@
     using MediatR;
     using MyOnlineShop.Application.Common;
 
-    public class LoginUserCommand : UserInputModel, IRequest<Result>
+    public class LoginUserCommand : UserInputModel, IRequest<Result<string>>
     {
     }
 }

@@ -5,7 +5,7 @@
     using MyOnlineShop.Domain.Catalog.Models.Products;
     using static MyOnlineShop.Domain.Catalog.Models.ModelConstants.ProductOption;
 
-    public class ProductOptionConfiguration : IEntityTypeConfiguration<ProductOption>
+    internal class ProductOptionConfiguration : IEntityTypeConfiguration<ProductOption>
     {
         public void Configure(EntityTypeBuilder<ProductOption> builder)
         {
