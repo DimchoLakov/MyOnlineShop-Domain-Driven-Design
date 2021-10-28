@@ -17,6 +17,10 @@
                 .HasMaxLength(NameMaxLength)
                 .IsUnicode()
                 .IsRequired();
+
+            builder
+                .Property(o => o.Price)
+                .HasPrecision(18, 2);
         }
     }
 }
