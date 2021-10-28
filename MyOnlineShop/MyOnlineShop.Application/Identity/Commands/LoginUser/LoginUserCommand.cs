@@ -5,5 +5,6 @@
 
     public class LoginUserCommand : UserInputModel, IRequest<Result<string>>
     {
+        public bool RememberMe { get; set; }
     }
 }

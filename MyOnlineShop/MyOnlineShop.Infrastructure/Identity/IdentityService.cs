@@ -66,7 +66,7 @@
             return Result<string>.SuccessWith(token);
         }
 
-        public async Task<Result> Register(CreateUserInputModel userInput)
+        public async Task<Result> Register(CreateUserCommand userInput)
         {
             var user = new User(
                 userInput.FirstName, 

@@ -14,7 +14,9 @@
             this.identity = identity;
         }
 
-        public async Task<Result> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(
+            CreateUserCommand request,
+            CancellationToken cancellationToken)
         {
             return await this.identity.Register(request);
         }
