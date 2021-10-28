@@ -11,7 +11,13 @@
         public static readonly ProductType Food = new ProductType(5, nameof(Food));
         public static readonly ProductType Appliances = new ProductType(6, nameof(Appliances));
 
-        private ProductType(int value, string name) : base(value, name)
+        private ProductType(int value)
+            : this(value, FromValue<ProductType>(value).Name)
+        {
+        }
+
+        private ProductType(int value, string name) 
+            : base(value, name)
         {
         }
     }

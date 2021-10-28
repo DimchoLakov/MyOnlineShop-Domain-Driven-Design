@@ -22,7 +22,7 @@
 
         public MyOnlineShopDbContext(
             DbContextOptions<MyOnlineShopDbContext> options,
-            IEventDispatcher eventDispatcher)
+            IEventDispatcher eventDispatcher) : base(options)
         {
             this.eventDispatcher = eventDispatcher;
             this.saveChangesTracker = new Stack<object>();

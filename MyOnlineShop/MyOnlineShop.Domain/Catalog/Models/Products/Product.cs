@@ -56,6 +56,37 @@
             this.options = new List<ProductOption>();
         }
 
+        private Product(
+            string name,
+            string description,
+            decimal price,
+            double weight,
+            string code,
+            string imageUrl,
+            int stockAvailable,
+            int maxStock,
+            bool isOnSale = false,
+            bool isArchived = false)
+        {
+            this.Name = name;
+            this.Description = description;
+            this.Price = price;
+            this.Weight = weight;
+            this.Code = code;
+            this.ImageUrl = imageUrl;
+            this.StockAvailable = stockAvailable;
+            this.MaxStock = maxStock;
+            this.IsOnSale = isOnSale;
+            this.IsArchived = isArchived;
+
+            this.Type = ProductType.General;
+
+            this.DateCreated = DateTime.Now;
+
+            this.categories = new List<Category>();
+            this.options = new List<ProductOption>();
+        }
+
         public string Name { get; private set; }
 
         public string Description { get; private set; }
