@@ -22,6 +22,7 @@
             this.FirstName = firstName;
             this.LastName = lastName;
             base.Email = email;
+            base.UserName = email;
         }
 
         public string FirstName { get; private set; } = default!;
