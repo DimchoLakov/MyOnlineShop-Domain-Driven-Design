@@ -61,7 +61,9 @@
                 return Result<string>.Failure(InvalidCredentialsErrorMessage);
             }
 
-            var token = this.jwtTokenGenerator.GenerateToken(user);
+            var roles = await this.userManager.GetRolesAsync(user);
+
+            var token = this.jwtTokenGenerator.GenerateToken(user, roles);
 
             return Result<string>.SuccessWith(token);
         }

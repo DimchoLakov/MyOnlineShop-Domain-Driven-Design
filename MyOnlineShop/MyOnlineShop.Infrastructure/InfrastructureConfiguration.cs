@@ -103,6 +103,7 @@
                     };
                 });
 
+            services.AddHttpContextAccessor();
             services.AddTransient<IIdentity, IdentityService>();
             services.AddTransient<IJwtTokenGenerator, JwtTokenGeneratorService>();
 

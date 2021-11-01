@@ -1,5 +1,6 @@
 ﻿namespace MyOnlineShop.Startup.Controllers
 {
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using MyOnlineShop.Application.Identity.Commands.CreateUser;
     using MyOnlineShop.Application.Identity.Commands.LoginUser;
@@ -24,6 +25,20 @@
                 return this.View(loginUserCommand);
             }
 
+            string token = result.Data;
+
+            this.Response
+                .Cookies
+                .Append(
+                    Authentication.CookieName,
+                    token,
+                    new CookieOptions
+                    {
+                        HttpOnly = true,
+                        Secure = true,
+                        MaxAge = TimeSpan.FromDays(1)
+                    });
+
             return this.Redirect(HomeUrl);
         }
 
@@ -41,6 +56,15 @@
                 this.ModelState.AddModelError(string.Empty, string.Join(Environment.NewLine, result.Errors));
                 return this.View(createUserCommand);
             }
+
+            return this.Redirect(HomeUrl);
+        }
+
+        public IActionResult Logout()
+        {
+            this.Response
+                .Cookies
+                .Delete(Authentication.CookieName);
 
             return this.Redirect(HomeUrl);
         }

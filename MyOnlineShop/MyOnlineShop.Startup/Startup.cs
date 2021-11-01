@@ -11,6 +11,8 @@ namespace MyOnlineShop.Startup
     using MyOnlineShop.Application.Common.Contracts;
     using MyOnlineShop.Domain;
     using MyOnlineShop.Infrastructure;
+    using MyOnlineShop.Startup.Middlewares;
+    using MyOnlineShop.Startup.Services;
 
     public class Startup
     {
@@ -29,6 +31,8 @@ namespace MyOnlineShop.Startup
                 .AddInfrastructure(this.Configuration)
                 .AddDatabaseDeveloperPageExceptionFilter()
                 .AddScoped<ICurrentUser, CurrentUserService>()
+                .AddScoped<ICurrentToken, CurrentTokenService>()
+                .AddTransient<JwtCookieAuthenticationMiddleware>()
                 .AddFluentValidation(validation => validation
                     .RegisterValidatorsFromAssemblyContaining<Result>())
                 .AddRazorPages();
@@ -57,6 +61,7 @@ namespace MyOnlineShop.Startup
                 .UseHttpsRedirection()
                 .UseStaticFiles()
                 .UseRouting()
+                .UseMiddleware<JwtCookieAuthenticationMiddleware>()
                 .UseAuthentication()
                 .UseAuthorization()
                 .UseEndpoints(endpoints =>

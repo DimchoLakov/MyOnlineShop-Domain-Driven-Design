@@ -5,7 +5,7 @@
 
     public class BaseController : Controller
     {
-        private IMediator? mediator;
+        private IMediator mediator;
 
         protected IMediator Mediator
             => this.mediator ??= (IMediator)this.HttpContext
