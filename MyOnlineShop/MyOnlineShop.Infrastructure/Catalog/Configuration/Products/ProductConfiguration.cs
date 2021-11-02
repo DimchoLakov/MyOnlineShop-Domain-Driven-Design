@@ -2,7 +2,9 @@
 {
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
+    using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
     using MyOnlineShop.Domain.Catalog.Models.Products;
+    using MyOnlineShop.Domain.Common.Models;
     using static MyOnlineShop.Domain.Catalog.Models.ModelConstants.Product;
     using static MyOnlineShop.Domain.Common.Constants.Common;
 
@@ -40,14 +42,13 @@
                 .HasMaxLength(MaxUrlLength)
                 .IsRequired();
 
-            builder
-                .OwnsOne(
-                p => p.Type, t =>
-                {
-                    t.WithOwner();
+            var productTypeConverter = new ValueConverter<ProductType, int>(
+                v => v.Value,
+                v => Enumeration.FromValue<ProductType>(v));
 
-                    t.Property(ty => ty.Value);
-                });
+            builder
+                .Property(p => p.Type)
+                .HasConversion(productTypeConverter);
 
             builder
                 .HasMany(p => p.Categories)

@@ -44,7 +44,8 @@
                             .MigrationsAssembly(typeof(MyOnlineShopDbContext).Assembly.FullName));
                 })
                 .AddScoped<ICatalogDbContext>(provider => provider.GetRequiredService<MyOnlineShopDbContext>())
-                .AddTransient<IInitializer, DatabaseInitializer>();
+                .AddTransient<IInitializer, DatabaseInitializer>()
+                .AddTransient<IDataSeeder, IdentityDataSeeder>();
 
             return services;
         }
