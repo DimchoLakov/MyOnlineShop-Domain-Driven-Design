@@ -9,16 +9,16 @@
     {
         private readonly string? code;
 
-        public ProductByCodeSpecification(string? name)
+        public ProductByCodeSpecification(string? code)
         {
-            this.code = name;
+            this.code = code;
         }
 
         protected override bool Include => this.code != null;
 
         public override Expression<Func<Product, bool>> ToExpression()
         {
-            return product => product.Code == this.code;
+            return product => product.Code.Contains(this.code!);
         }
     }
 }

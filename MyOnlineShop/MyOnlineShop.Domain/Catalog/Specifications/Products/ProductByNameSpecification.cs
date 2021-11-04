@@ -18,7 +18,7 @@
 
         public override Expression<Func<Product, bool>> ToExpression()
         {
-            return product => product.Name == this.name;
+            return product => product.Name.Contains(this.name!);
         }
     }
 }
