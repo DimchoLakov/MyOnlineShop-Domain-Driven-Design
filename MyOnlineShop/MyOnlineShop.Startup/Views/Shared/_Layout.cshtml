@@ -52,6 +52,11 @@
         </nav>
     </header>
     <div class="container">
+        @if (currentUser.IsAdministrator)
+        {
+            <h2 class="text-danger admin admin-left d-inline-block p-0 m-0">Admin</h2>
+            <h2 class="text-danger admin admin-right d-inline-block p-0 m-0">Admin</h2>
+        }
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

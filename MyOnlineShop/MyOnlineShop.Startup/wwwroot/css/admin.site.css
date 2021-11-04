@@ -155,3 +155,19 @@ body {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
+
+.admin {
+    position: fixed;
+    top: 35%;
+    z-index: 5000;
+}
+
+.admin-left {
+    left: 5%;
+    transform: rotate(-30deg);
+}
+
+.admin-right {
+    right: 5%;
+    transform: rotate(30deg);
+}
