@@ -39,13 +39,13 @@
                 @for (int k = 0; k <= 3 && k + i < Model.Products.Count(); k++)
                 {
                     <div class="card p-0">
-                        <a asp-area="" asp-controller="Products" asp-action="Details" asp-route-id="@Model.Products[k + i].Id" asp-route-fromPage="@Model.Page">
+                        <a asp-area="Admin" asp-controller="Products" asp-action="Details" asp-route-id="@Model.Products[k + i].Id" asp-route-fromPage="@Model.Page">
                             <div class="card-img-wrapper">
                                 <img class="card-img-top" src="@Model.Products[k + i].ImageUrl" alt="Image">
                             </div>
                         </a>
                         <div class="card-body">
-                            <a asp-area="" asp-controller="Products" asp-action="Details" asp-route-id="@Model.Products[k + i].Id" asp-route-fromPage="@Model.Page">
+                            <a asp-area="Admin" asp-controller="Products" asp-action="Details" asp-route-id="@Model.Products[k + i].Id" asp-route-fromPage="@Model.Page">
                                 <h5 class="card-title">@Model.Products[k + i].Name</h5>
                                 <p class="card-text">Description: @Model.Products[k + i].Description</p>
                                 <p class="card-text">Price: $@Model.Products[k + i].Price</p>

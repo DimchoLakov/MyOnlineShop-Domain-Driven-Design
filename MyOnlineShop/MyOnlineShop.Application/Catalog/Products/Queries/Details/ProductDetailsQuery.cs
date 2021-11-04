@@ -4,6 +4,11 @@
 
     public class ProductDetailsQuery : IRequest<ProductDetailsOutputModel>
     {
-        public int Id { get; set; }
+        public ProductDetailsQuery(int id)
+        {
+            this.Id = id;
+        }
+
+        public int Id { get; private set; }
     }
 }

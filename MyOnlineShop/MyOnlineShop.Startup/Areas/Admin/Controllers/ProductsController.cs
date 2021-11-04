@@ -2,6 +2,7 @@
 {
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using MyOnlineShop.Application.Catalog.Products.Queries.Details;
     using MyOnlineShop.Application.Catalog.Products.Queries.Search;
     using System.Threading.Tasks;
 
@@ -30,7 +31,11 @@
 
         public async Task<IActionResult> Details(int id, int? fromPage = 1)
         {
-            return await Task.Run(() => this.View());
+            var produdct = await this.Mediator.Send(new ProductDetailsQuery(id));
+
+            this.ViewData["FromPage"] = fromPage;
+
+            return this.View(produdct);
         }
 
         public async Task<IActionResult> Create()
