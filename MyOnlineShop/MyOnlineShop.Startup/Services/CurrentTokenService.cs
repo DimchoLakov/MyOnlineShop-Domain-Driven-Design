@@ -1,4 +1,4 @@
-﻿namespace MyOnlineShop.Web.Services
+﻿namespace MyOnlineShop.Startup.Services
 {
     public class CurrentTokenService : ICurrentToken
     {

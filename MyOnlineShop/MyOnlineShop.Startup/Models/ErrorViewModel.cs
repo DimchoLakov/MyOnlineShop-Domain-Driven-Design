@@ -1,4 +1,4 @@
-namespace MyOnlineShop.Web.Models
+namespace MyOnlineShop.Startup.Models
 {
     using System;
 

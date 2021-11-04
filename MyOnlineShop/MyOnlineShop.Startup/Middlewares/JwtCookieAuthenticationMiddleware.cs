@@ -1,7 +1,7 @@
-﻿namespace MyOnlineShop.Web.Middlewares
+﻿namespace MyOnlineShop.Startup.Middlewares
 {
     using Microsoft.AspNetCore.Http;
-    using MyOnlineShop.Web.Services;
+    using MyOnlineShop.Startup.Services;
     using System.Threading.Tasks;
     using static Constants;
 

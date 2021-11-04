@@ -1,4 +1,4 @@
-﻿namespace MyOnlineShop.Web
+﻿namespace MyOnlineShop.Startup
 {
     using MediatR;
     using Microsoft.AspNetCore.Mvc;
