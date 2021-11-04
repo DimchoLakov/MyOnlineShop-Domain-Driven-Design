@@ -13,11 +13,11 @@
             this.productQueryRepository = productQueryRepository;
         }
 
-        public Task<ProductDetailsOutputModel> Handle(
+        public async Task<ProductDetailsOutputModel> Handle(
             ProductDetailsQuery request,
             CancellationToken cancellationToken)
         {
-            var productDetails = this.productQueryRepository.GetDetails(request.Id, cancellationToken);
+            var productDetails = await this.productQueryRepository.GetDetails(request.Id, cancellationToken);
 
             return productDetails;
         }

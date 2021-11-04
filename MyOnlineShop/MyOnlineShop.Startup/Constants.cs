@@ -25,5 +25,10 @@
         {
             public const string AdminAreaName = "Admin";
         }
+
+        public class Products
+        {
+            public const string NotFoundMessage = "Product not found!";
+        }
     }
 }

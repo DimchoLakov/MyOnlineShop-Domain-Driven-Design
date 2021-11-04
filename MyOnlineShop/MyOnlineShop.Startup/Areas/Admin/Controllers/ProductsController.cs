@@ -32,6 +32,10 @@
         public async Task<IActionResult> Details(int id, int? fromPage = 1)
         {
             var produdct = await this.Mediator.Send(new ProductDetailsQuery(id));
+            if (produdct == null)
+            {
+                return this.NotFound();
+            }
 
             this.ViewData["FromPage"] = fromPage;
 

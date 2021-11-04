@@ -13,6 +13,8 @@ namespace MyOnlineShop.Startup
     using MyOnlineShop.Infrastructure;
     using MyOnlineShop.Startup.Middlewares;
     using MyOnlineShop.Startup.Services;
+    using System.Net;
+    using System.Threading.Tasks;
 
     public class Startup
     {
@@ -57,8 +59,21 @@ namespace MyOnlineShop.Startup
             }
 
             app
-                //.UseValidationExceptionHandler()
-                .UseStatusCodePages()
+                .UseStatusCodePages(async context =>
+                await Task.Run(() =>
+                {
+                    var response = context.HttpContext.Response;
+
+                    if (response.StatusCode == (int)HttpStatusCode.Unauthorized)
+                    {
+                        response.Redirect("/Identity/Login");
+                    }
+
+                    if (response.StatusCode == (int)HttpStatusCode.NotFound)
+                    {
+                        response.Redirect($"/Home/Error/?statusCode={response.StatusCode}");
+                    }
+                }))
                 .UseHttpsRedirection()
                 .UseStaticFiles()
                 .UseRouting()
