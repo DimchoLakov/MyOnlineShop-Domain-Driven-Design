@@ -1,9 +1,9 @@
 ﻿namespace MyOnlineShop.Application.Catalog.Products.Queries.Details
 {
     using MediatR;
-    using MyOnlineShop.Application.Common;
 
-    public class ProductDetailsQuery : EntityCommand<int>, IRequest<ProductDetailsOutputModel>
+    public class ProductDetailsQuery : IRequest<ProductDetailsOutputModel>
     {
+        public int Id { get; set; }
     }
 }

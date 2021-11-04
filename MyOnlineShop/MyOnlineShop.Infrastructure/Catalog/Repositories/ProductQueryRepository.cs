@@ -7,6 +7,7 @@
     using MyOnlineShop.Domain.Catalog.Models.Products;
     using MyOnlineShop.Domain.Common;
     using MyOnlineShop.Infrastructure.Common.Persistance;
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading;
@@ -37,7 +38,7 @@
                 .FirstOrDefaultAsync(cancellationToken);
         }
 
-        public async Task<IEnumerable<TOutputModel>> GetProductListing<TOutputModel>(
+        public async Task<List<TOutputModel>> GetProductListing<TOutputModel>(
             Specification<Product> productSpecification,
             int skip = 0,
             int take = int.MaxValue,
@@ -55,11 +56,15 @@
 
         public async Task<int> GetTotalPages(
             Specification<Product> productSpecification,
+            int productsPerPage,
             CancellationToken cancellationToken = default)
         {
-            return await this.All()
+            int count = await this.All()
                 .Where(productSpecification)
                 .CountAsync(cancellationToken);
+
+            int totalPages = (int)Math.Ceiling((decimal)count / productsPerPage);
+            return totalPages;
         }
     }
 }

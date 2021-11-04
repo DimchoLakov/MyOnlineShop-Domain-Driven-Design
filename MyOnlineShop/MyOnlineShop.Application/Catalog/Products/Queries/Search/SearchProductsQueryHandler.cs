@@ -35,7 +35,10 @@
                     cancellationToken);
 
             int totalPages = await this.productQueryRepository
-                .GetTotalPages(productSpecification, cancellationToken);
+                .GetTotalPages(
+                    productSpecification,
+                    ProductsPerPage,
+                    cancellationToken);
 
             return new SearchProductsOutputModel(productListing, request.Page, totalPages);
         }

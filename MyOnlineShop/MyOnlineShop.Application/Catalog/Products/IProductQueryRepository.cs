@@ -14,14 +14,15 @@
             int id,
             CancellationToken cancellationToken = default);
 
-        Task<IEnumerable<TOutputModel>> GetProductListing<TOutputModel>(
+        Task<List<TOutputModel>> GetProductListing<TOutputModel>(
             Specification<Product> productSpecification, 
             int skip = 0,
             int take = int.MaxValue,
             CancellationToken cancellationToken = default);
 
         Task<int> GetTotalPages(
-            Specification<Product> productSpecification, 
+            Specification<Product> productSpecification,
+            int productsPerPage,
             CancellationToken cancellationToken = default);
     }
 }

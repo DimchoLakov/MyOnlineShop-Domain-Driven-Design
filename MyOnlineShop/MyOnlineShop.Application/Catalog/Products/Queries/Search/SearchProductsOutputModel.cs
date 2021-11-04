@@ -6,7 +6,7 @@
     public class SearchProductsOutputModel : ProductsOutputModel<ProductOutputModel>
     {
         public SearchProductsOutputModel(
-            IEnumerable<ProductOutputModel> products,
+            List<ProductOutputModel> products,
             int page,
             int totalPages)
             : base(products, page, totalPages)

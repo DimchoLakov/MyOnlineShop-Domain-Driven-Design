@@ -20,5 +20,10 @@
         {
             public const string AdministratorRoleName = "Administrator";
         }
+
+        public class Areas
+        {
+            public const string AdminAreaName = "Admin";
+        }
     }
 }

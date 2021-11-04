@@ -21,8 +21,4 @@
     <ProjectReference Include="..\MyOnlineShop.Infrastructure\MyOnlineShop.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\" />
-  </ItemGroup>
-
 </Project>

@@ -5,7 +5,7 @@
     public abstract class ProductsOutputModel<TProductOutputModel>
     {
         internal ProductsOutputModel(
-            IEnumerable<TProductOutputModel> products,
+            List<TProductOutputModel> products,
             int page,
             int totalPages)
         {
@@ -14,7 +14,7 @@
             this.TotalPages = totalPages;
         }
 
-        public IEnumerable<TProductOutputModel> Products { get; }
+        public List<TProductOutputModel> Products { get; }
 
         public int Page { get; }
 
