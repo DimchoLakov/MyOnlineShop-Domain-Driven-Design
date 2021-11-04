@@ -1,8 +1,8 @@
-﻿namespace MyOnlineShop.Startup.Controllers
+﻿namespace MyOnlineShop.Web.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
-    using MyOnlineShop.Startup.Models;
+    using MyOnlineShop.Web.Models;
     using System.Diagnostics;
 
     public class HomeController : Controller

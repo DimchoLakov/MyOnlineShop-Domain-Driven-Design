@@ -1,4 +1,4 @@
-﻿namespace MyOnlineShop.Startup
+﻿namespace MyOnlineShop.Web
 {
     using Infrastructure.Common;
     using Microsoft.AspNetCore.Builder;
