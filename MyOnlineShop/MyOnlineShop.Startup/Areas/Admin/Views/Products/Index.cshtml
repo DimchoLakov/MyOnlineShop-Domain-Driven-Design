@@ -7,16 +7,16 @@
     <div class="col-md-12">
         <form method="get" asp-area="Admin" asp-controller="Products" asp-action="Index">
             <div class="form-row justify-content-start align-items-center">
-                <div class="col-4 pr-0">
+                <div class="col-4">
                     <input name="Name" value="@ViewData["Name"]" placeholder="What are you looking for?" class="form-control mb-2" />
                 </div>
-                <div class="col-auto pr-0">
+                <div class="col-auto">
                     <input name="Description" value="@ViewData["Description"]" placeholder="Description" class="form-control mb-2" />
                 </div>
-                <div class="col-auto pr-0">
+                <div class="col-auto">
                     <input name="MinPrice" value="@ViewData["MinPrice"]" placeholder="Min Price" class="form-control mb-2" />
                 </div>
-                <div class="col-auto pr-0">
+                <div class="col-auto mr-1">
                     <input name="MaxPrice" value="@ViewData["MaxPrice"]" placeholder="Max Price" class="form-control mb-2" />
                 </div>
                 <div class="col-auto align-self-md-end pl-0">
@@ -24,6 +24,9 @@
                 </div>
             </div>
         </form>
+    </div>
+    <div class="col-md-3">
+        <a asp-area="Admin" asp-controller="Products" asp-action="Create" class="btn btn-success">Create New Product</a>
     </div>
 </div>
 <div class="row mb-2">

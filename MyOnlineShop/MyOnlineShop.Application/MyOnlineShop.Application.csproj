@@ -19,8 +19,4 @@
     <ProjectReference Include="..\MyOnlineShop.Domain\MyOnlineShop.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Catalog\Products\Commands\" />
-  </ItemGroup>
-
 </Project>

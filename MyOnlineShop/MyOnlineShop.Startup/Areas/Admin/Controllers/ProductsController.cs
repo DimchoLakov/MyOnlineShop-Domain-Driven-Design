@@ -2,8 +2,10 @@
 {
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using MyOnlineShop.Application.Catalog.Products.Commands.Create;
     using MyOnlineShop.Application.Catalog.Products.Queries.Details;
     using MyOnlineShop.Application.Catalog.Products.Queries.Search;
+    using System;
     using System.Threading.Tasks;
 
     [Authorize(Roles = Constants.Roles.AdministratorRoleName)]
@@ -42,9 +44,26 @@
             return this.View(produdct);
         }
 
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
-            return await Task.Run(() => this.View());
+            return this.View(new CreateProductCommand());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(CreateProductCommand createProductCommand)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(createProductCommand);
+            }
+
+            var result = await this.Mediator.Send(createProductCommand);
+            if (!result.Succeeded)
+            {
+                return this.View(createProductCommand);
+            }
+
+            return this.RedirectToAction(nameof(this.Details), new { id = result.Data });
         }
 
         //[HttpPost]

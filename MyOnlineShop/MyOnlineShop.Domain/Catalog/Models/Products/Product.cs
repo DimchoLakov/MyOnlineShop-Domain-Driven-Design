@@ -7,6 +7,7 @@
 
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class Product : Entity<int>, IAggregateRoot
     {
@@ -34,7 +35,8 @@
                 code,
                 imageUrl,
                 stockAvailable,
-                maxStock);
+                maxStock,
+                type);
 
             this.Name = name;
             this.Description = description;
@@ -123,7 +125,8 @@
             string code,
             string imageUrl,
             int stockAvailable,
-            int maxStock)
+            int maxStock,
+            ProductType type)
         {
             this.ValidateName(name);
             this.ValidateDescription(description);
@@ -133,6 +136,7 @@
             this.ValidateImageUrl(imageUrl);
             this.ValidateStockAvailable(stockAvailable);
             this.ValidateMaxStock(maxStock);
+            this.ValidateType(type);
         }
 
         public Product AddCategory(Category category)
@@ -145,7 +149,7 @@
         public Product RemoveCategory(Category category)
         {
             this.categories.Remove(category);
-         
+
             return this;
         }
 
@@ -161,6 +165,18 @@
             this.options.Remove(option);
 
             return this;
+        }
+
+        public ProductOption GetOption(string name)
+        {
+            return this.options
+                .First(o => o.Name == name);
+        }
+
+        public ProductOption GetOption(int optionId)
+        {
+            return this.options
+                .First(o => o.Id == optionId);
         }
 
         public Product UpdateName(string name)
@@ -286,6 +302,11 @@
         private void ValidateMaxStock(int maxStock)
         {
             Guard.AgainstOutOfRange<InvalidProductException>(maxStock, ModelConstants.Product.MinStock, ModelConstants.Product.MaxStock, nameof(this.MaxStock));
+        }
+
+        private void ValidateType(ProductType type)
+        {
+            Guard.AgainstNull<InvalidProductException, ProductType>(type, nameof(this.Type));
         }
     }
 }

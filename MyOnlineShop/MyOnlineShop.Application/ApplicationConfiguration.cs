@@ -4,7 +4,6 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using MyOnlineShop.Application.Common;
-    using MyOnlineShop.Application.Common.Behaviours;
     using System.Reflection;
 
     public static class ApplicationConfiguration
@@ -19,8 +18,7 @@
                     builder => builder.BindNonPublicProperties = true)
                 .AddAutoMapper(Assembly.GetExecutingAssembly())
                 .AddMediatR(Assembly.GetExecutingAssembly())
-                .AddEventHandlers()
-                .AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestBehaviourPipeline<,>));
+                .AddEventHandlers();
 
             return services;
         }

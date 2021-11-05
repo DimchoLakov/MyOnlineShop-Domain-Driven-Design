@@ -26,6 +26,8 @@
             public const int MaxStockAvailable = int.MaxValue;
             public const int MinStock = 0;
             public const int MaxStock = int.MaxValue;
+            public const int MinProductType = 1;
+            public const int MaxProductType = 7;
         }
 
         public class ProductOption
