@@ -9,12 +9,16 @@
     </div>
     <div class="col-md-8">
         <h5>@Model.Name</h5>
-        <p>Price: $@Model.Price</p>
-        <p>Stock Available: @Model.StockAvailable</p>
-        <p>Weight in Kg: @Model.Weight</p>
-        <p>Description: @Model.Description</p>
-        <p>Date Added: @Model.DateCreated.ToString("dd/MMMM/yyyy HH:mm")</p>
-        <p>Date Last Updated: @Model.DateUpdated?.ToString("dd/MMMM/yyyy HH:mm")</p>
+        <p><strong>Price:</strong> $@Model.Price</p>
+        <p><strong>Description:</strong> @Model.Description</p>
+        <p><strong>Stock Available:</strong> @Model.StockAvailable</p>
+        <p><strong>Max Stock:</strong> @Model.MaxStock</p>
+        <p><strong>Weight in Kg:</strong> @Model.Weight</p>
+        <p><strong>Code:</strong> @Model.Code</p>
+        <p><strong>Type:</strong> @Model.Type.Name</p>
+        <p><strong>Is On Sale:</strong> @(Model.IsOnSale ? "Yes" : "No")</p>
+        <p><strong>Date Added:</strong> @Model.DateCreated.ToString("dd/MMMM/yyyy HH:mm")</p>
+        <p><strong>Date Last Updated:</strong> @Model.DateUpdated?.ToString("dd/MMMM/yyyy HH:mm")</p>
         <p class="d-md-inline-block p-2 text-white bg-@(Model.IsArchived ? "danger" : "success")">@(Model.IsArchived ? "Archived" : "Not Archived")</p>
     </div>
 </div>
@@ -29,6 +33,6 @@
 </div>
 
 <div class="text-center">
-    <a asp-area="Admin" asp-controller="Products" asp-action="Index" asp-route-currentPage="@this.ViewData["FromPage"]" class="btn btn-secondary w-25">Back</a>
-    <a asp-area="Admin" asp-controller="Products" asp-action="Edit" asp-route-id="@Model.Id" asp-route-fromPage="@this.ViewData["FromPage"]" class="btn btn-primary w-25">Edit</a>
+    <a asp-area="Admin" asp-controller="Products" asp-action="Index" asp-route-currentPage="@this.ViewData[Constants.ControllerViewData.FromPageKey]" class="btn btn-secondary w-25">Back</a>
+    <a asp-area="Admin" asp-controller="Products" asp-action="Edit" asp-route-id="@Model.Id" asp-route-fromPage="@this.ViewData[Constants.ControllerViewData.FromPageKey]" class="btn btn-primary w-25">Edit</a>
 </div>
