@@ -5,6 +5,7 @@
 
 <h2>Edit @Model.Name</h2>
 <form method="post" enctype="multipart/form-data" asp-area="Admin" asp-controller="Products" asp-action="Edit">
+    <input type="hidden" name="page" value="@this.ViewData[Constants.ControllerViewData.FromPageKey]" />
     <div class="form-row">
         <div class="form-group col-md-6">
             <label asp-for="Name" required></label>

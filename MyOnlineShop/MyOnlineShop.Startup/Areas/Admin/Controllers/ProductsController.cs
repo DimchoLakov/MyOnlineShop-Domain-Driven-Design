@@ -67,22 +67,22 @@
             return this.RedirectToAction(nameof(this.Details), new { id = result.Data });
         }
 
-        public async Task<IActionResult> Edit(int id, int? fromPage = 1)
+        public async Task<IActionResult> Edit(int id, int? page = 1)
         {
             var editProductCommand = await this.Mediator.Send(new EditProductQuery(id));
 
-            this.ViewData[Constants.ControllerViewData.FromPageKey] = fromPage;
+            this.ViewData[Constants.ControllerViewData.FromPageKey] = page;
 
             return this.View(editProductCommand);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(EditProductCommand editProductCommand, int fromPage = 1)
+        public async Task<IActionResult> Edit(EditProductCommand editProductCommand, int page = 1)
         {
             var result = await this.Mediator.Send(editProductCommand);
             if (result.Data)
             {
-                return this.RedirectToAction(nameof(Index), new { page = fromPage });
+                return this.RedirectToAction(nameof(Index), new { page });
             }
 
             return this.View(editProductCommand);
