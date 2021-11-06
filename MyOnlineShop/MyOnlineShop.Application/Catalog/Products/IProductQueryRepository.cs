@@ -1,5 +1,6 @@
 ﻿namespace MyOnlineShop.Application.Catalog.Products
 {
+    using MyOnlineShop.Application.Catalog.Products.Commands.Edit;
     using MyOnlineShop.Application.Catalog.Products.Queries.Details;
     using MyOnlineShop.Application.Common.Contracts;
     using MyOnlineShop.Domain.Catalog.Models.Products;
@@ -23,6 +24,10 @@
         Task<int> GetTotalPages(
             Specification<Product> productSpecification,
             int productsPerPage,
+            CancellationToken cancellationToken = default);
+
+        Task<EditProductCommand> GetProductToEdit(
+            int id,
             CancellationToken cancellationToken = default);
     }
 }

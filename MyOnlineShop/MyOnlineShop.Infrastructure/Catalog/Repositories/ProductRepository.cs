@@ -3,6 +3,7 @@
     using AutoMapper;
     using Microsoft.EntityFrameworkCore;
     using MyOnlineShop.Application.Catalog.Products;
+    using MyOnlineShop.Application.Catalog.Products.Commands.Edit;
     using MyOnlineShop.Application.Catalog.Products.Queries.Details;
     using MyOnlineShop.Application.Common.Exceptions;
     using MyOnlineShop.Domain.Catalog.Models.Products;
@@ -95,7 +96,7 @@
 
             var productOption = await this.Data
                                     .ProductOptions
-                                    .FindAsync(optionId);
+                                    .FindAsync(new object[] { optionId }, cancellationToken);
             if (productOption == null)
             {
                 return false;
@@ -112,7 +113,7 @@
         {
             return await this.Data
                        .Products
-                       .FindAsync(id, cancellationToken);
+                       .FindAsync(new object[] { id }, cancellationToken);
         }
 
         public async Task<ProductOption> GetProductOption(int productId, string optionName, CancellationToken cancellationToken = default)
@@ -139,6 +140,23 @@
             var productOption = product.GetOption(optionId);
 
             return productOption;
+        }
+
+        public async Task<EditProductCommand> GetProductToEdit(int id, CancellationToken cancellationToken = default)
+        {
+            var productsQueryable = this.All()
+                .Where(p => p.Id == id);
+
+            var product = await this.mapper
+                .ProjectTo<EditProductCommand>(productsQueryable)
+                .FirstOrDefaultAsync();
+
+            if (product == null)
+            {
+                throw new NotFoundException(nameof(product), id);
+            }
+
+            return product;
         }
     }
 }

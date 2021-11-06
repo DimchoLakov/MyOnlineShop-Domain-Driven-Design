@@ -3,9 +3,10 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using MyOnlineShop.Application.Catalog.Products.Commands.Create;
+    using MyOnlineShop.Application.Catalog.Products.Commands.Edit;
     using MyOnlineShop.Application.Catalog.Products.Queries.Details;
+    using MyOnlineShop.Application.Catalog.Products.Queries.Edit;
     using MyOnlineShop.Application.Catalog.Products.Queries.Search;
-    using System;
     using System.Threading.Tasks;
 
     [Authorize(Roles = Constants.Roles.AdministratorRoleName)]
@@ -14,19 +15,19 @@
     {
         public async Task<IActionResult> Index(
             string name,
-            string description, 
-            decimal? minPrice, 
-            decimal? maxPrice, 
+            string description,
+            decimal? minPrice,
+            decimal? maxPrice,
             int page = 1)
         {
             var searchProductsQuery = new SearchProductsQuery(name, description, minPrice, maxPrice, page);
 
             var result = await this.Mediator.Send(searchProductsQuery);
 
-            this.ViewData["Name"] = name;
-            this.ViewData["Description"] = description;
-            this.ViewData["MinPrice"] = minPrice;
-            this.ViewData["MaxPrice"] = maxPrice;
+            this.ViewData[Constants.ControllerViewData.ProductNameKey] = name;
+            this.ViewData[Constants.ControllerViewData.ProductDescriptionKey] = description;
+            this.ViewData[Constants.ControllerViewData.ProductMinPriceKey] = minPrice;
+            this.ViewData[Constants.ControllerViewData.ProductMaxPriceKey] = maxPrice;
 
             return this.View(result);
         }
@@ -39,7 +40,7 @@
                 return this.NotFound();
             }
 
-            this.ViewData["FromPage"] = fromPage;
+            this.ViewData[Constants.ControllerViewData.FromPageKey] = fromPage;
 
             return this.View(produdct);
         }
@@ -66,22 +67,26 @@
             return this.RedirectToAction(nameof(this.Details), new { id = result.Data });
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Create(CreateProductViewModel createProductViewModel)
-        //{
-        //    return await Task.Run(() => this.View());
-        //}
-
         public async Task<IActionResult> Edit(int id, int? fromPage = 1)
         {
-            return await Task.Run(() => this.View());
+            var editProductCommand = await this.Mediator.Send(new EditProductQuery(id));
+
+            this.ViewData[Constants.ControllerViewData.FromPageKey] = fromPage;
+
+            return this.View(editProductCommand);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Edit(EditProductViewModel editProductViewModel)
-        //{
-        //    return await Task.Run(() => this.View());
-        //}
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditProductCommand editProductCommand, int fromPage = 1)
+        {
+            var result = await this.Mediator.Send(editProductCommand);
+            if (result.Data)
+            {
+                return this.RedirectToAction(nameof(Index), new { page = fromPage });
+            }
+
+            return this.View(editProductCommand);
+        }
 
         [HttpPost]
         public async Task<IActionResult> Archive(int id)

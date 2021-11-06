@@ -59,6 +59,7 @@ namespace MyOnlineShop.Startup
             }
 
             app
+                .UseMiddleware<ValidationExceptionHandlerMiddleware>()
                 .UseStatusCodePages(async context =>
                 await Task.Run(() =>
                 {

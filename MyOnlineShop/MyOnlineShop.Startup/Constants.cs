@@ -30,5 +30,14 @@
         {
             public const string NotFoundMessage = "Product not found!";
         }
+
+        public class ControllerViewData
+        {
+            public const string FromPageKey = "FromPage";
+            public const string ProductNameKey = "Name";
+            public const string ProductDescriptionKey = "Description";
+            public const string ProductMinPriceKey = "MinPrice";
+            public const string ProductMaxPriceKey = "MaxPrice";
+        }
     }
 }

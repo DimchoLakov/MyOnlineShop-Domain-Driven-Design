@@ -184,6 +184,8 @@
             this.ValidateName(name);
             this.Name = name;
 
+            this.DateUpdated = DateTime.Now;
+
             return this;
         }
 
@@ -191,6 +193,8 @@
         {
             this.ValidateDescription(description);
             this.Description = description;
+
+            this.DateUpdated = DateTime.Now;
 
             return this;
         }
@@ -200,6 +204,8 @@
             this.ValidatePrice(price);
             this.Price = price;
 
+            this.DateUpdated = DateTime.Now;
+
             return this;
         }
 
@@ -207,6 +213,8 @@
         {
             this.ValidateWeight(weight);
             this.Weight = weight;
+
+            this.DateUpdated = DateTime.Now;
 
             return this;
         }
@@ -216,6 +224,8 @@
             this.ValidateCode(code);
             this.Code = code;
 
+            this.DateUpdated = DateTime.Now;
+
             return this;
         }
 
@@ -223,6 +233,8 @@
         {
             this.ValidateImageUrl(imageUrl);
             this.ImageUrl = imageUrl;
+
+            this.DateUpdated = DateTime.Now;
 
             return this;
         }
@@ -232,6 +244,8 @@
             this.ValidateStockAvailable(stockAvailable);
             this.StockAvailable = stockAvailable;
 
+            this.DateUpdated = DateTime.Now;
+
             return this;
         }
 
@@ -240,12 +254,25 @@
             this.ValidateMaxStock(maxStock);
             this.MaxStock = maxStock;
 
+            this.DateUpdated = DateTime.Now;
+
             return this;
         }
 
         public Product UpdateType(ProductType type)
         {
             this.Type = type;
+
+            this.DateUpdated = DateTime.Now;
+
+            return this;
+        }
+
+        public Product UpdateType(int typeValue)
+        {
+            this.Type = Enumeration.FromValue<ProductType>(typeValue);
+
+            this.DateUpdated = DateTime.Now;
 
             return this;
         }
@@ -254,12 +281,16 @@
         {
             this.IsOnSale = isOnSale;
 
+            this.DateUpdated = DateTime.Now;
+
             return this;
         }
 
         public Product UpdateIsArchived(bool isArchived)
         {
             this.IsArchived = isArchived;
+
+            this.DateUpdated = DateTime.Now;
 
             return this;
         }

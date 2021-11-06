@@ -16,9 +16,9 @@
             public const int NameMaxLength = 2048;
             public const int DescriptionMinLength = 1;
             public const int DescriptionMaxLength = ushort.MaxValue;
-            public const decimal MinPrice = 0;
+            public const decimal MinPrice = 0m;
             public const decimal MaxPrice = decimal.MaxValue;
-            public const double MinWeight = 0;
+            public const double MinWeight = 0d;
             public const double MaxWeight = double.MaxValue;
             public const int MinCodeLength = 8;
             public const int MaxCodeLength = 8;
@@ -34,7 +34,7 @@
         {
             public const int NameMinLength = 1;
             public const int NameMaxLength = byte.MaxValue;
-            public const decimal MinPrice = 0;
+            public const decimal MinPrice = 0m;
             public const decimal MaxPrice = decimal.MaxValue;
         }
     }
