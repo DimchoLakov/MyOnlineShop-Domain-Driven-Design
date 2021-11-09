@@ -48,7 +48,7 @@
         public Category Build()
         {
             if (!this.isNameSet || 
-                this.isImageUrlSet || 
+                !this.isImageUrlSet || 
                 !this.isOrderSet)
             {
                 throw new InvalidCategoryException("Name, Image Url and Order must be set!");

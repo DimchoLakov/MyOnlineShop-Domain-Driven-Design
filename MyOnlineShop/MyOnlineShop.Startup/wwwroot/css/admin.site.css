@@ -171,3 +171,7 @@ body {
     right: 5%;
     transform: rotate(30deg);
 }
+
+.category img {
+    width: 300px;
+}

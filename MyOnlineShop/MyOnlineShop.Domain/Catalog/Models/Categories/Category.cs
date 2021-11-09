@@ -39,6 +39,11 @@
 
         public IReadOnlyCollection<Product> Products => this.products.AsReadOnly();
 
+        public void ChangeStatus()
+        {
+            this.IsActive = !this.IsActive;
+        }
+
         private void Validate(string name, string imageUrl, int order)
         {
             this.ValidateName(name);
