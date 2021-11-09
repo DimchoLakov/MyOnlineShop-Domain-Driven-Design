@@ -8,16 +8,16 @@
         <form method="get" asp-area="Admin" asp-controller="Products" asp-action="Index">
             <div class="form-row justify-content-start align-items-center">
                 <div class="col-4">
-                    <input name="Name" value="@Constants.ControllerViewData.ProductNameKey" placeholder="What are you looking for?" class="form-control mb-2" />
+                    <input name="Name" value="@this.ViewData[Constants.ControllerViewData.ProductNameKey]" placeholder="What are you looking for?" class="form-control mb-2" />
                 </div>
                 <div class="col-auto">
-                    <input name="Description" value="@Constants.ControllerViewData.ProductDescriptionKey" placeholder="Description" class="form-control mb-2" />
+                    <input name="Description" value="@this.ViewData[Constants.ControllerViewData.ProductDescriptionKey]" placeholder="Description" class="form-control mb-2" />
                 </div>
                 <div class="col-auto">
-                    <input name="MinPrice" value="@Constants.ControllerViewData.ProductMinPriceKey" placeholder="Min Price" class="form-control mb-2" />
+                    <input name="MinPrice" value="@this.ViewData[Constants.ControllerViewData.ProductMinPriceKey]" placeholder="Min Price" class="form-control mb-2" />
                 </div>
                 <div class="col-auto mr-1">
-                    <input name="MaxPrice" value="@Constants.ControllerViewData.ProductMaxPriceKey" placeholder="Max Price" class="form-control mb-2" />
+                    <input name="MaxPrice" value="@this.ViewData[Constants.ControllerViewData.ProductMaxPriceKey]" placeholder="Max Price" class="form-control mb-2" />
                 </div>
                 <div class="col-auto align-self-md-end pl-0">
                     <button type="submit" class="btn btn-primary mb-2">Search</button>
@@ -53,13 +53,6 @@
                                 <p class="card-text">Description: @Model.Products[k + i].Description</p>
                                 <p class="card-text">Price: $@Model.Products[k + i].Price</p>
                             </a>
-                        </div>
-                        <div class="card-footer text-center">
-                            <form method="post" asp-area="" asp-controller="ShoppingCarts" asp-action="AddProduct">
-                                <input type="hidden" name="ProductId" value="@Model.Products[k + i].Id" />
-                                <input type="hidden" name="FromPage" value="@Model.Page" />
-                                <button class="btn btn-primary w-100">Add to Shopping Cart</button>
-                            </form>
                         </div>
                     </div>
                 }
