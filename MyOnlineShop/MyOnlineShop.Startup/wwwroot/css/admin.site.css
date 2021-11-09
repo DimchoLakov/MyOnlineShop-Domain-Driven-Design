@@ -172,6 +172,7 @@ body {
     transform: rotate(30deg);
 }
 
-.category img {
+.category img,
+.category-img {
     width: 300px;
 }

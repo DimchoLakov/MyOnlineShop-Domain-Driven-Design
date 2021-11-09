@@ -15,23 +15,24 @@
     </div>
     <div class="col-md-12">
         <div class="categories">
-            @foreach (var categoryIndexViewModel in Model)
+            @foreach (var categoryOutputModel in Model)
             {
                 <div class="category">
-                    <p>@categoryIndexViewModel.Name</p>
-                    <p>Order: @categoryIndexViewModel.Order</p>
-                    <img src="@categoryIndexViewModel.ImageUrl" />
+                    <p>@categoryOutputModel.Name</p>
+                    <p>Order: @categoryOutputModel.Order</p>
+                    <img src="@categoryOutputModel.ImageUrl" />
                     <form method="post" asp-area="Admin" asp-controller="Categories" asp-action="StatusChange" class="p-2">
-                        <input name="Id" value="@categoryIndexViewModel.Id" id="Id" type="hidden" />
-                        @if (categoryIndexViewModel.IsActive)
+                        <input name="Id" value="@categoryOutputModel.Id" id="Id" type="hidden" />
+                        @if (categoryOutputModel.IsActive)
                         {
-                            <button type="submit" class="btn btn-danger w-100">Make Inactive</button>
+                            <button type="submit" class="btn btn-warning w-100">Make Inactive</button>
                         }
                         else
                         {
                             <button type="submit" class="btn btn-success w-100">Make Active</button>
                         }
                     </form>
+                    <a class="btn btn-danger w-100" asp-area="Admin" asp-controller="Categories" asp-action="Delete" asp-route-id="@categoryOutputModel.Id">Delete</a>
                 </div>
             }
         </div>

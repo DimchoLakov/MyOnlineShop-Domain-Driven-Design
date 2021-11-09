@@ -4,7 +4,9 @@
     using Microsoft.AspNetCore.Mvc;
     using MyOnlineShop.Application.Catalog.Categories.Commands.ChangeStatus;
     using MyOnlineShop.Application.Catalog.Categories.Commands.Create;
+    using MyOnlineShop.Application.Catalog.Categories.Commands.Delete;
     using MyOnlineShop.Application.Catalog.Categories.Queries;
+    using MyOnlineShop.Application.Catalog.Categories.Queries.Delete;
     using System.Threading.Tasks;
 
     [Authorize(Roles = Constants.Roles.AdministratorRoleName)]
@@ -46,6 +48,25 @@
             await this.Mediator.Send(new CategoryChangeStatusCommand(id));
 
             return this.RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var deleteCategoryCommand = await this.Mediator.Send(new DeleteCategoryQuery(id));
+
+            return this.View(deleteCategoryCommand);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(DeleteCategoryCommand deleteCategoryCommand)
+        {
+            var result = await this.Mediator.Send(deleteCategoryCommand);
+            if (result.Succeeded)
+            {
+                return this.RedirectToAction(nameof(Index));
+            }
+
+            return this.View(deleteCategoryCommand);
         }
     }
 }

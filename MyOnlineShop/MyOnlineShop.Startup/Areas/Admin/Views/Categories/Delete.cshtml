@@ -1,0 +1,26 @@
+﻿@model DeleteCategoryCommand
+@{
+    ViewData["Title"] = $"Delete Category {Model.Name}";
+}
+
+<h2>Delete Category</h2>
+<form method="post" asp-area="Admin" asp-controller="Categories" asp-action="Delete">
+    <input asp-for="@Model.Id" type="hidden" />
+    <input asp-for="@Model.Name" type="hidden" />
+    <input asp-for="@Model.ImageUrl" type="hidden" />
+    <div class="form-row">
+        <div class="form-group col-6">
+            <label asp-for="@Model.Name"></label>
+            <input asp-for="@Model.Name" class="form-control" placeholder="e.g. Cars" disabled readonly />
+            <span asp-validation-for="@Model.Name" class="text-danger"></span>
+        </div>
+        <img class="category-img" src="@Model.ImageUrl" alt="Category Image" />
+    </div>
+    <h3 class="text-danger">You are about to delete Category '@Model.Name'. Are you sure?</h3>
+    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+    <a class="btn btn-primary" asp-area="Admin" asp-controller="Categories" asp-action="Index">Cancel</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
