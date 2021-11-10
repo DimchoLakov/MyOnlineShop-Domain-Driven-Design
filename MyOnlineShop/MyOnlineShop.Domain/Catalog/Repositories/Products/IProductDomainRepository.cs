@@ -9,6 +9,8 @@
     {
         Task<Product> Find(int id, CancellationToken cancellationToken = default);
 
+        Task<Product> FindWithCategories(int id, CancellationToken cancellationToken = default);
+
         Task<bool> Delete(int id, CancellationToken cancellationToken = default);
 
         Task<ProductOption> GetProductOption(int productId, string optionName, CancellationToken cancellationToken = default);

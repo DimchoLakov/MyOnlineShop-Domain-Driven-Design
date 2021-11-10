@@ -1,5 +1,6 @@
 ﻿namespace MyOnlineShop.Application.Catalog.Categories
 {
+    using Microsoft.AspNetCore.Mvc.Rendering;
     using MyOnlineShop.Application.Common.Contracts;
     using MyOnlineShop.Domain.Catalog.Models.Categories;
     using System.Collections.Generic;
@@ -13,5 +14,7 @@
         Task<int> GetMaxOrder(CancellationToken cancellationToken = default);
 
         Task<bool> Exists(string name, CancellationToken cancellationToken = default);
+
+        Task<IEnumerable<SelectListItem>> UnassignedSelectListItems(int productId, CancellationToken cancellationToken = default);
     }
 }

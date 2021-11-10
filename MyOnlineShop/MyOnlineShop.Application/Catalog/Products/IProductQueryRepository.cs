@@ -29,5 +29,9 @@
         Task<EditProductCommand> GetProductToEdit(
             int id,
             CancellationToken cancellationToken = default);
+
+        Task<IEnumerable<AssignedCategoryModel>> AssignedCategories(
+            int productId, 
+            CancellationToken cancellationToken = default);
     }
 }

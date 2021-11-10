@@ -4,6 +4,35 @@
 }
 
 <h2>Edit @Model.Name</h2>
+<form method="post" asp-area="Admin" asp-controller="Products" asp-action="AddToCategory">
+    <input type="hidden" id="ProductId" name="ProductId" value="@Model.Id" />
+    <input type="hidden" id="Page" name="Page" value="@this.ViewData[Constants.ControllerViewData.FromPageKey]" />
+    <div class="form-row align-items-end">
+        <div class="form-group col-md-8">
+            <label>Add To Category</label>
+            <select id="CategoryId" name="CategoryId" asp-items="@Model.UnassignedCategorySelectListItems" class="form-control">
+                <option value="">Please select a Category</option>
+            </select>
+        </div>
+        <div class="form-group col-md-4">
+            <button class="btn btn-success add-product-to-category">Add to Category</button>
+        </div>
+    </div>
+</form>
+<h3>In Categories:</h3>
+<div class="d-flex align-items-baseline">
+    @foreach (var category in Model.AssignedCategoryModels)
+    {
+        <p class="d-inline-block ml-1 mr-1 font-weight-bold">@category.Name</p>
+        <form class="form-inline ml-1 mr-1" method="post" asp-area="Admin" asp-controller="Products" asp-action="RemoveFromCategory">
+            <input type="hidden" id="ProductId" name="ProductId" value="@Model.Id" />
+            <input type="hidden" id="CategoryId" name="CategoryId" value="@category.Id" />
+            <input type="hidden" id="Page" name="Page" value="@this.ViewData[Constants.ControllerViewData.FromPageKey]" />
+            <button class="btn btn-sm btn-danger" type="submit">Remove</button>
+        </form>
+    }
+</div>
+<hr />
 <form method="post" enctype="multipart/form-data" asp-area="Admin" asp-controller="Products" asp-action="Edit">
     <input type="hidden" name="page" value="@this.ViewData[Constants.ControllerViewData.FromPageKey]" />
     <div class="form-row">
@@ -49,26 +78,34 @@
             <textarea asp-for="Description" class="form-control" rows="10" required></textarea>
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>
-        <div class="form-group col-md-3">
-            <label asp-for="StockAvailable"></label>
-            <input asp-for="StockAvailable" type="number" class="form-control" required>
-            <span asp-validation-for="StockAvailable" class="text-danger"></span>
-        </div>
-        <div class="form-group col-md-3">
-            <label asp-for="MaxStock"></label>
-            <input asp-for="MaxStock" type="number" class="form-control" required>
-            <span asp-validation-for="MaxStock" class="text-danger"></span>
-        </div>
-        <div class="form-group col-md-6">
-            <label asp-for="Type"></label>
-            <select asp-for="Type" asp-items="Model.ProductTypeSelectListItems" class="form-control">
-                <option selected="selected" value="">Please select Type</option>
-            </select>
-            <span asp-validation-for="Type" class="text-danger"></span>
+        <div class="col-md-6">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="StockAvailable"></label>
+                    <input asp-for="StockAvailable" type="number" class="form-control" required>
+                    <span asp-validation-for="StockAvailable" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="MaxStock"></label>
+                    <input asp-for="MaxStock" type="number" class="form-control" required>
+                    <span asp-validation-for="MaxStock" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-12">
+                    <label asp-for="Type"></label>
+                    <select asp-for="Type" asp-items="Model.ProductTypeSelectListItems" class="form-control">
+                        <option selected="selected" value="">Please select Type</option>
+                    </select>
+                    <span asp-validation-for="Type" class="text-danger"></span>
+                </div>
+            </div>
         </div>
     </div>
     <button type="submit" class="btn btn-success">Save Changes</button>
 </form>
+
+<div class="text-center">
+    <a asp-area="Admin" asp-controller="Products" asp-action="Details" asp-route-id="@Model.Id" asp-route-page="@this.ViewData[Constants.ControllerViewData.FromPageKey]" class="btn btn-secondary w-25">Back</a>
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

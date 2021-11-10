@@ -158,5 +158,35 @@
 
             return product;
         }
+
+        public async Task<IEnumerable<AssignedCategoryModel>> AssignedCategories(
+            int productId,
+            CancellationToken cancellationToken = default)
+        {
+            var categories = this.All()
+                        .Where(p => p.Id == productId)
+                        .SelectMany(p => p.Categories);
+
+            return await this.mapper
+                .ProjectTo<AssignedCategoryModel>(categories)
+                .ToListAsync();
+        }
+
+        public async Task<Product> FindWithCategories(
+            int id, 
+            CancellationToken cancellationToken = default)
+        {
+            var product = await this.All()
+                .Where(p => p.Id == id)
+                .Include(p => p.Categories)
+                .FirstOrDefaultAsync();
+
+            if (product == null)
+            {
+                throw new NotFoundException(nameof(product), id);
+            }
+
+            return product;
+        }
     }
 }

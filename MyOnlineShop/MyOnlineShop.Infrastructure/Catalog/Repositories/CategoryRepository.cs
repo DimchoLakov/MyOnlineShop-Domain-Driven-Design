@@ -1,8 +1,10 @@
 ﻿namespace MyOnlineShop.Infrastructure.Catalog.Repositories
 {
     using AutoMapper;
+    using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.EntityFrameworkCore;
     using MyOnlineShop.Application.Catalog.Categories;
+    using MyOnlineShop.Application.Catalog.Products.Commands.Edit;
     using MyOnlineShop.Domain.Catalog.Models.Categories;
     using MyOnlineShop.Domain.Catalog.Repositories.Categories;
     using MyOnlineShop.Infrastructure.Common.Persistance;
@@ -81,6 +83,37 @@
         {
             return await this.All()
                 .AnyAsync(c => c.Name == name, cancellationToken);
+        }
+
+        public async Task<IEnumerable<SelectListItem>> UnassignedSelectListItems(
+            int productId,
+            CancellationToken cancellationToken = default)
+        {
+            var assignedCategoryIds = await this.Data
+                .Products
+                .SelectMany(p => p.Categories)
+                .Select(c => c.Id)
+                .ToListAsync(cancellationToken);
+
+            var allCategoryIds = await this.Data
+                .Categories
+                .Select(c => c.Id)
+                .ToListAsync(cancellationToken);
+
+            var unassignedCategoryIds = allCategoryIds
+                .Where(cId => !assignedCategoryIds.Contains(cId))
+                .ToList();
+
+            var categorySelectListItems = await this.All()
+                .Where(c => unassignedCategoryIds.Contains(c.Id))
+                .Select(c => new SelectListItem
+                {
+                    Text = c.Name,
+                    Value = c.Id.ToString()
+                })
+                .ToListAsync(cancellationToken);
+
+            return categorySelectListItems;
         }
     }
 }

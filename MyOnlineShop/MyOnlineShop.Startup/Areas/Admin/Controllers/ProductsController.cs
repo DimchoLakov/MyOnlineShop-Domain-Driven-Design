@@ -2,8 +2,10 @@
 {
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using MyOnlineShop.Application.Catalog.Products.Commands.AddToCategory;
     using MyOnlineShop.Application.Catalog.Products.Commands.Create;
     using MyOnlineShop.Application.Catalog.Products.Commands.Edit;
+    using MyOnlineShop.Application.Catalog.Products.Commands.RemoveFromCategory;
     using MyOnlineShop.Application.Catalog.Products.Queries.Details;
     using MyOnlineShop.Application.Catalog.Products.Queries.Edit;
     using MyOnlineShop.Application.Catalog.Products.Queries.Search;
@@ -98,6 +100,30 @@
         public async Task<IActionResult> Unarchive(int id)
         {
             return await Task.Run(() => this.View());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddToCategory(int productId, int categoryId, int page = 1)
+        {
+            var result = await this.Mediator.Send(new AddProductToCategoryCommand(productId, categoryId));
+            if (!result.Succeeded)
+            {
+                return this.BadRequest();
+            }
+
+            return this.RedirectToAction(nameof(this.Edit), new { id = productId, page });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveFromCategory(int productId, int categoryId, int page = 1)
+        {
+            var result = await this.Mediator.Send(new RemoveCategoryFromProductCommand(productId, categoryId));
+            if (!result.Succeeded)
+            {
+                return this.BadRequest();
+            }
+
+            return this.RedirectToAction(nameof(this.Edit), new { id = productId, page });
         }
     }
 }
