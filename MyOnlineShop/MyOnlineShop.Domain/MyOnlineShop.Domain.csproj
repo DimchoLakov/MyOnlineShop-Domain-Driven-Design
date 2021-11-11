@@ -14,7 +14,6 @@
     <Folder Include="Ordering\Specifications\" />
     <Folder Include="Payments\" />
     <Folder Include="Catalog\Events\" />
-    <Folder Include="ShoppingCart\" />
   </ItemGroup>
 
   <ItemGroup>
