@@ -2,6 +2,7 @@
 {
     using MediatR;
     using MyOnlineShop.Application.Catalog.Products.Queries.Common;
+    using MyOnlineShop.Application.Common.Contracts;
     using MyOnlineShop.Domain.Catalog.Models.Products;
     using MyOnlineShop.Domain.Catalog.Specifications.Products;
     using MyOnlineShop.Domain.Common;
@@ -13,10 +14,14 @@
         private const int ProductsPerPage = 10;
 
         private readonly IProductQueryRepository productQueryRepository;
+        private readonly ICurrentUser currentUser;
 
-        public SearchProductsQueryHandler(IProductQueryRepository productQueryRepository)
+        public SearchProductsQueryHandler(
+            IProductQueryRepository productQueryRepository, 
+            ICurrentUser currentUser)
         {
             this.productQueryRepository = productQueryRepository;
+            this.currentUser = currentUser;
         }
 
         public async Task<SearchProductsOutputModel> Handle(
@@ -27,9 +32,12 @@
 
             int skip = (request.Page - 1) * ProductsPerPage;
 
+            bool isUserAdmin = this.currentUser.IsAdministrator;
+
             var productListing = await this.productQueryRepository
                 .GetProductListing<ProductOutputModel>(
                     productSpecification,
+                    isUserAdmin,
                     skip,
                     ProductsPerPage,
                     cancellationToken);

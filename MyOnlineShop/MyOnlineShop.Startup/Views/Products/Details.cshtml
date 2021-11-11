@@ -1,0 +1,45 @@
+﻿@model ProductDetailsOutputModel
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="row mb-2">
+    <div class="col-md-4">
+        <img src="@Model.ImageUrl" alt="Image" class="card-img">
+    </div>
+    <div class="col-md-8">
+        <h5>@Model.Name</h5>
+        <p><strong>Price:</strong> $@Model.Price</p>
+        <p><strong>Description:</strong> @Model.Description</p>
+        <p><strong>Stock Available:</strong> @Model.StockAvailable</p>
+        <p><strong>Max Stock:</strong> @Model.MaxStock</p>
+        <p><strong>Weight in Kg:</strong> @Model.Weight</p>
+        <p><strong>Code:</strong> @Model.Code</p>
+        <p><strong>Type:</strong> @Model.Type.Name</p>
+        <p><strong>Is On Sale:</strong> @(Model.IsOnSale ? "Yes" : "No")</p>
+        <p><strong>Date Added:</strong> @Model.DateCreated.ToString("dd/MMMM/yyyy HH:mm")</p>
+        <p><strong>Date Last Updated:</strong> @Model.DateUpdated?.ToString("dd/MMMM/yyyy HH:mm")</p>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col-md-12">
+        <div class="d-md-flex flex-md-row flex-md-wrap">
+            <div class="product-image">
+                <img src="@Model.ImageUrl" alt="Image" class="img-fluid" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <a asp-area="" asp-controller="Products" asp-action="Index" asp-route-page="@this.ViewData[Constants.ControllerViewData.FromPageKey]" class="btn btn-secondary w-25">Back</a>
+    </div>
+    <div class="col-md-4">
+        <form method="post" asp-area="" asp-controller="ShoppingCart" asp-action="AddProduct">
+            <input type="hidden" name="ProductId" value="@Model.Id" />
+            <input type="hidden" name="FromPage" value="@this.ViewData[Constants.ControllerViewData.FromPageKey]" />
+            <button class="btn btn-success w-100">Add to Trolley</button>
+        </form>
+    </div>
+</div>

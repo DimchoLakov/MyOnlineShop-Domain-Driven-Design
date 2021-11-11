@@ -16,7 +16,8 @@
             CancellationToken cancellationToken = default);
 
         Task<List<TOutputModel>> GetProductListing<TOutputModel>(
-            Specification<Product> productSpecification, 
+            Specification<Product> productSpecification,
+            bool isUserAdmin,
             int skip = 0,
             int take = int.MaxValue,
             CancellationToken cancellationToken = default);

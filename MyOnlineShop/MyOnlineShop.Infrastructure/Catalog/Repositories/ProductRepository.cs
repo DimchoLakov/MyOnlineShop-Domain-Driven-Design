@@ -44,6 +44,7 @@
 
         public async Task<List<TOutputModel>> GetProductListing<TOutputModel>(
             Specification<Product> productSpecification,
+            bool isUserAdmin,
             int skip = 0,
             int take = int.MaxValue,
             CancellationToken cancellationToken = default)
@@ -52,6 +53,11 @@
                 .Where(productSpecification)
                 .Skip(skip)
                 .Take(take);
+
+            if (!isUserAdmin)
+            {
+                products = products.Where(p => !p.IsArchived);
+            }
 
             return await this.mapper
                 .ProjectTo<TOutputModel>(products)
