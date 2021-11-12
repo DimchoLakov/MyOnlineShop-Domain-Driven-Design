@@ -21,7 +21,9 @@
             return this.Data.Set<TEntity>();
         }
 
-        public async Task SaveAsync(TEntity entity, CancellationToken cancellationToken = default)
+        public async Task SaveAsync(
+            TEntity entity,
+            CancellationToken cancellationToken = default)
         {
             this.Data.Update(entity);
 

@@ -4,7 +4,7 @@
     @if (!string.IsNullOrWhiteSpace(this.currentUser.UserId))
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @this.currentUser.Username!</a>
+            <a class="nav-link text-dark" title="Manage">Hello @this.currentUser.Username!</a>
         </li>
         <li class="nav-item">
             <form class="form-inline" asp-area="" asp-controller="Identity" asp-action="Logout">

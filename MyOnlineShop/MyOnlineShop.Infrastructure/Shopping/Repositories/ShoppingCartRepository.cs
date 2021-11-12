@@ -1,5 +1,6 @@
 ﻿namespace MyOnlineShop.Infrastructure.Shopping.Repositories
 {
+    using AutoMapper;
     using Microsoft.EntityFrameworkCore;
     using MyOnlineShop.Application.Shopping;
     using MyOnlineShop.Domain.Shopping.Models;
@@ -11,12 +12,17 @@
     using System.Threading.Tasks;
 
     internal class ShoppingCartRepository : DataRepository<IShoppingDbContext, ShoppingCart>,
-        //IShoppingCartQueryRepository,
-        IShoppingCartDomainRepository
+        IShoppingCartDomainRepository,
+        IShoppingCartQueryRepository
     {
-        public ShoppingCartRepository(IShoppingDbContext dbContext)
+        private readonly IMapper mapper;
+
+        public ShoppingCartRepository(
+            IShoppingDbContext dbContext, 
+            IMapper mapper)
             : base(dbContext)
         {
+            this.mapper = mapper;
         }
 
         public async Task<bool> Delete(
@@ -95,6 +101,20 @@
                 .ShoppingCarts
                 .Where(s => s.UserId == userId)
                 .SelectMany(s => s.CartItems)
+                .ToListAsync(cancellationToken);
+        }
+
+        public async Task<IEnumerable<TOutputModel>> GetCartListing<TOutputModel>(
+            string userId,
+            CancellationToken cancellationToken = default)
+        {
+            var cartItems = this.Data
+                .ShoppingCarts
+                .Where(s => s.UserId == userId)
+                .SelectMany(s => s.CartItems);
+
+            return await this.mapper
+                .ProjectTo<TOutputModel>(cartItems)
                 .ToListAsync(cancellationToken);
         }
     }

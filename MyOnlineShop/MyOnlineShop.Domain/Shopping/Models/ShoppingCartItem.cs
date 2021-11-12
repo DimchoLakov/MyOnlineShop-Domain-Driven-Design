@@ -15,7 +15,6 @@
             string productImageUrl)
         {
             this.Validate(
-                productId,
                 quantity,
                 productName,
                 productWeight,
@@ -49,7 +48,6 @@
         public decimal Price => this.ProductPrice * this.Quantity;
 
         private void Validate(
-            int productId,
             int quantity,
             string productName,
             double productWeight,

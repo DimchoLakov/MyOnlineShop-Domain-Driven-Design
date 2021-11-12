@@ -15,6 +15,7 @@
     using MyOnlineShop.Infrastructure.Common.Events;
     using MyOnlineShop.Infrastructure.Common.Persistance;
     using MyOnlineShop.Infrastructure.Identity;
+    using MyOnlineShop.Infrastructure.Shopping;
     using System.Text;
 
     public static class InfrastructureConfiguration
@@ -44,6 +45,7 @@
                             .MigrationsAssembly(typeof(MyOnlineShopDbContext).Assembly.FullName));
                 })
                 .AddScoped<ICatalogDbContext>(provider => provider.GetRequiredService<MyOnlineShopDbContext>())
+                .AddScoped<IShoppingDbContext>(provider => provider.GetRequiredService<MyOnlineShopDbContext>())
                 .AddTransient<IInitializer, DatabaseInitializer>()
                 .AddTransient<IDataSeeder, IdentityDataSeeder>();
 
