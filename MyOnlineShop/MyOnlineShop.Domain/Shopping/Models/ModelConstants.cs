@@ -12,6 +12,8 @@
             public const decimal MaxProductPrice = decimal.MaxValue;
             public const double MinProductWeight = 0d;
             public const double MaxProductWeight = double.MaxValue;
+            public const int MinQuantity = 1;
+            public const int MaxQuantity = int.MaxValue;
         }
     }
 }

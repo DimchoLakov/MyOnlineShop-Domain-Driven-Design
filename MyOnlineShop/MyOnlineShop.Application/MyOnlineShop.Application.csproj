@@ -19,4 +19,9 @@
     <ProjectReference Include="..\MyOnlineShop.Domain\MyOnlineShop.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Shopping\Commands\" />
+    <Folder Include="Shopping\Queries\" />
+  </ItemGroup>
+
 </Project>

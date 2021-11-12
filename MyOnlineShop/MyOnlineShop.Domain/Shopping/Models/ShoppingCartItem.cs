@@ -57,7 +57,6 @@
             string productDescription,
             string productImageUrl)
         {
-            this.ValidateProductId(productId);
             this.ValidateQuantity(quantity);
             this.ValidateProductName(productName);
             this.ValidateProductWeight(productWeight);
@@ -66,49 +65,48 @@
             this.ValidateProductImageUrl(productImageUrl);
         }
 
-        private void ValidateProductId(int productId)
-        {
-            Guard.AgainstOutOfRange<InvalidShoppingCartItemException>(productId, 1, int.MaxValue, nameof(this.ProductId));
-        }
-
         private void ValidateQuantity(int quantity)
         {
-            Guard.AgainstOutOfRange<InvalidShoppingCartItemException>(quantity, 1, int.MaxValue, nameof(this.Quantity));
+            Guard.AgainstOutOfRange<InvalidShoppingCartItemException>(
+                quantity,
+                ModelConstants.ShoppingCartItem.MinQuantity,
+                ModelConstants.ShoppingCartItem.MaxQuantity,
+                nameof(this.Quantity));
         }
 
         private void ValidateProductName(string productName)
         {
             Guard.ForStringLength<InvalidShoppingCartItemException>(
-                productName, 
-                ModelConstants.ShoppingCartItem.ProductNameMinLength, 
-                ModelConstants.ShoppingCartItem.ProductNameMaxLength, 
+                productName,
+                ModelConstants.ShoppingCartItem.ProductNameMinLength,
+                ModelConstants.ShoppingCartItem.ProductNameMaxLength,
                 nameof(this.ProductName));
         }
 
         private void ValidateProductWeight(double productWeight)
         {
             Guard.AgainstOutOfRange<InvalidShoppingCartItemException>(
-                productWeight, 
-                ModelConstants.ShoppingCartItem.MinProductWeight, 
-                ModelConstants.ShoppingCartItem.MaxProductWeight, 
+                productWeight,
+                ModelConstants.ShoppingCartItem.MinProductWeight,
+                ModelConstants.ShoppingCartItem.MaxProductWeight,
                 nameof(this.ProductWeight));
         }
 
         private void ValidateProductPrice(decimal productPrice)
         {
             Guard.AgainstOutOfRange<InvalidShoppingCartItemException>(
-                productPrice, 
-                ModelConstants.ShoppingCartItem.MinProductPrice, 
-                ModelConstants.ShoppingCartItem.MaxProductPrice, 
+                productPrice,
+                ModelConstants.ShoppingCartItem.MinProductPrice,
+                ModelConstants.ShoppingCartItem.MaxProductPrice,
                 nameof(this.ProductPrice));
         }
 
         private void ValidateProductDescription(string productDescription)
         {
             Guard.ForStringLength<InvalidShoppingCartItemException>(
-                productDescription, 
-                ModelConstants.ShoppingCartItem.ProductDescriptionMinLength, 
-                ModelConstants.ShoppingCartItem.ProductDescriptionMaxLength, 
+                productDescription,
+                ModelConstants.ShoppingCartItem.ProductDescriptionMinLength,
+                ModelConstants.ShoppingCartItem.ProductDescriptionMaxLength,
                 nameof(this.ProductDescription));
         }
 

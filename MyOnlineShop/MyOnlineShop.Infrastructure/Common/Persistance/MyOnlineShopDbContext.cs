@@ -5,9 +5,11 @@
     using MyOnlineShop.Domain.Catalog.Models.Categories;
     using MyOnlineShop.Domain.Catalog.Models.Products;
     using MyOnlineShop.Domain.Common.Models;
+    using MyOnlineShop.Domain.Shopping.Models;
     using MyOnlineShop.Infrastructure.Catalog;
     using MyOnlineShop.Infrastructure.Common.Events;
     using MyOnlineShop.Infrastructure.Identity;
+    using MyOnlineShop.Infrastructure.Shopping;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
@@ -15,7 +17,8 @@
     using System.Threading.Tasks;
 
     internal class MyOnlineShopDbContext : IdentityDbContext<User>, 
-        ICatalogDbContext
+        ICatalogDbContext,
+        IShoppingDbContext
     {
         private readonly IEventDispatcher eventDispatcher;
         private readonly Stack<object> saveChangesTracker;
@@ -33,6 +36,10 @@
         public DbSet<ProductOption> ProductOptions { get; set; } = default!;
 
         public DbSet<Category> Categories { get; set; } = default!;
+
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; } = default!;
+
+        public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; } = default!;
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
