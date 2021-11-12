@@ -14,7 +14,7 @@
             this.TotalPages = totalPages;
         }
 
-        public List<TProductOutputModel> Products { get; }
+        public List<TProductOutputModel> Products { get; } = new List<TProductOutputModel>();
 
         public int Page { get; }
 
