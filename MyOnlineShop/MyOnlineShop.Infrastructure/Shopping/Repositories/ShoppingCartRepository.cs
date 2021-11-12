@@ -82,6 +82,22 @@
                        .FirstOrDefaultAsync(s => s.UserId == userId, cancellationToken);
         }
 
+        public async Task<ShoppingCart> FindWithCartItems(int id, CancellationToken cancellationToken = default)
+        {
+            return await this.Data
+                       .ShoppingCarts
+                       .Include(s => s.CartItems)
+                       .FirstOrDefaultAsync(s => s.Id == id, cancellationToken);
+        }
+
+        public async Task<ShoppingCart> FindWithCartItems(string userId, CancellationToken cancellationToken = default)
+        {
+            return await this.Data
+                       .ShoppingCarts
+                       .Include(s => s.CartItems)
+                       .FirstOrDefaultAsync(s => s.UserId == userId, cancellationToken);
+        }
+
         public async Task<IEnumerable<ShoppingCartItem>> GetCartItems(
             int shoppingCartId,
             CancellationToken cancellationToken = default)

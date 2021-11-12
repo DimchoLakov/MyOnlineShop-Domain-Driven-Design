@@ -3,6 +3,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using MyOnlineShop.Application.Shopping.Queries.CartItems;
+    using MyOnlineShop.Application.ShoppingGateway.Commands.AddProduct;
     using System.Threading.Tasks;
 
     [Authorize]
@@ -15,37 +16,13 @@
             return this.View(result);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> AddProduct(int productId, int? fromPage = 1)
-        //{
-        //    try
-        //    {
-        //        var productDetailsViewModel = await this.catalogService.GetProductDetails(productId, fromPage);
+        [HttpPost]
+        public async Task<IActionResult> AddProduct(int productId, int? fromPage = 1)
+        {
+            await this.Mediator.Send(new AddProductToShoppingCartCommand(productId));
 
-        //        var cartItemViewModel = this.mapper.Map<ProductDetailsViewModel, CartItemViewModel>(productDetailsViewModel);
-
-        //        await this.shoppingCartService.AddToCart(this.currentUserService.UserId, cartItemViewModel);
-
-        //        return this.Redirect($"/Products/Index/?currentPage={fromPage}");
-        //    }
-        //    catch (Refit.ApiException apiEx)
-        //    {
-        //        if (apiEx.HasContent)
-        //        {
-        //            JsonConvert
-        //                .DeserializeObject<List<string>>(apiEx.Content)
-        //                .ForEach(error => this.ModelState.AddModelError(string.Empty, error));
-        //        }
-        //        else
-        //        {
-        //            this.ModelState.AddModelError(string.Empty, ErrorConstants.InternalServerErrorMessage);
-        //        }
-
-        //        this.HandleException(apiEx);
-
-        //        return this.Redirect($"/Products/Index/?currentPage={fromPage}");
-        //    }
-        //}
+            return this.Redirect($"/Products/Index/?page={fromPage}");
+        }
 
         //[HttpPost]
         //public async Task<IActionResult> Clear()

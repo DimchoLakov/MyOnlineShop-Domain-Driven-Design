@@ -5,6 +5,7 @@
     using MyOnlineShop.Domain.Shopping.Exceptions;
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class ShoppingCart : Entity<int>, IAggregateRoot
     {
@@ -53,6 +54,12 @@
         public void RemoveCartItem(ShoppingCartItem cartItem)
         {
             this.cartItems.Remove(cartItem);
+        }
+
+        public ShoppingCartItem? GetCartItem(int productId)
+        {
+            return this.cartItems
+                .FirstOrDefault(c => c.ProductId == productId);
         }
 
         private void ValidateUserId(string userId)

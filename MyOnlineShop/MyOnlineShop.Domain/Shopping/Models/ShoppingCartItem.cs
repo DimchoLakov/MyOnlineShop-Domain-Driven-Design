@@ -47,6 +47,11 @@
 
         public decimal Price => this.ProductPrice * this.Quantity;
 
+        public void UpdateQuantity(int quantityToAdd)
+        {
+            this.Quantity += quantityToAdd;
+        }
+
         private void Validate(
             int quantity,
             string productName,

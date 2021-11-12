@@ -22,6 +22,7 @@
             this.ViewData[Constants.ControllerViewData.ProductDescriptionKey] = description;
             this.ViewData[Constants.ControllerViewData.ProductMinPriceKey] = minPrice;
             this.ViewData[Constants.ControllerViewData.ProductMaxPriceKey] = maxPrice;
+            this.ViewData[Constants.ControllerViewData.FromPageKey] = page;
 
             return this.View(result);
         }

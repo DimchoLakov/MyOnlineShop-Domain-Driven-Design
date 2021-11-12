@@ -12,8 +12,12 @@
 
         Task<ShoppingCart> Find(string userId, CancellationToken cancellationToken = default);
 
+        Task<ShoppingCart> FindWithCartItems(int id, CancellationToken cancellationToken = default);
+
+        Task<ShoppingCart> FindWithCartItems(string userId, CancellationToken cancellationToken = default);
+
         Task<bool> Delete(int id, CancellationToken cancellationToken = default);
-        
+
         Task<bool> Delete(string userId, CancellationToken cancellationToken = default);
 
         Task<IEnumerable<ShoppingCartItem>> GetCartItems(int shoppingCartId, CancellationToken cancellationToken = default!);
