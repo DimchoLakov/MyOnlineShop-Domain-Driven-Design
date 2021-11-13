@@ -84,7 +84,7 @@
             var result = await this.Mediator.Send(editProductCommand);
             if (result.Data)
             {
-                return this.RedirectToAction(nameof(Index), new { page });
+                return this.RedirectToAction(nameof(Details), new { id = editProductCommand.Id, fromPage = page });
             }
 
             return this.View(editProductCommand);
