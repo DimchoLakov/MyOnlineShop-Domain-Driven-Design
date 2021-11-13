@@ -1,5 +1,6 @@
 ﻿namespace MyOnlineShop.Web.Controllers
 {
+    using Application.Shopping.Commands.RemoveCartItem;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using MyOnlineShop.Application.Common.Contracts;
@@ -41,33 +42,13 @@
             return this.Redirect(nameof(Index));
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> RemoveItem(int productId)
-        //{
-        //    try
-        //    {
-        //        await this.shoppingCartService.RemoveItem(productId, this.currentUserService.UserId);
+        [HttpPost]
+        public async Task<IActionResult> RemoveItem(int productId)
+        {
+            await this.Mediator.Send(new RemoveCartItemCommand(productId, this.currentUser.UserId));
 
-        //        return this.Redirect(nameof(Index));
-        //    }
-        //    catch (Refit.ApiException apiEx)
-        //    {
-        //        if (apiEx.HasContent)
-        //        {
-        //            JsonConvert
-        //                .DeserializeObject<List<string>>(apiEx.Content)
-        //                .ForEach(error => this.ModelState.AddModelError(string.Empty, error));
-        //        }
-        //        else
-        //        {
-        //            this.ModelState.AddModelError(string.Empty, ErrorConstants.InternalServerErrorMessage);
-        //        }
-
-        //        this.HandleException(apiEx);
-        //    }
-
-        //    return this.Redirect(nameof(Index));
-        //}
+            return this.Redirect(nameof(Index));
+        }
 
         //public async Task<IActionResult> Checkout()
         //{
