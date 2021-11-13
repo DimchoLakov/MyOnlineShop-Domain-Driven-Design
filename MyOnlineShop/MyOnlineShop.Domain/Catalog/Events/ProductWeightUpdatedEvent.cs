@@ -4,7 +4,9 @@
 
     public class ProductWeightUpdatedEvent : IDomainEvent
     {
-        public ProductWeightUpdatedEvent(int productId, double productWeight)
+        public ProductWeightUpdatedEvent(
+            int productId,
+            double productWeight)
         {
             this.ProductId = productId;
             this.ProductWeight = productWeight;

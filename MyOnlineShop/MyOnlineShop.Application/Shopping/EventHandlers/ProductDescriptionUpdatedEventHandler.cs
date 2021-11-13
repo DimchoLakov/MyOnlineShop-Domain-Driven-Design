@@ -17,7 +17,7 @@
         public async Task Handle(ProductDescriptionUpdatedEvent domainEvent)
         {
             await this.shoppingCartDomainRepository
-                      .UpdateCartItemsWithProductName(domainEvent.ProductId, domainEvent.ProductDescription);
+                      .UpdateCartItemsWithProductDescription(domainEvent.ProductId, domainEvent.ProductDescription);
         }
     }
 }
