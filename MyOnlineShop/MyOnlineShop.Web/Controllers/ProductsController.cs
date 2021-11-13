@@ -1,4 +1,4 @@
-﻿namespace MyOnlineShop.Startup.Controllers
+﻿namespace MyOnlineShop.Web.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
     using MyOnlineShop.Application.Catalog.Products.Queries.Details;

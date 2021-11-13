@@ -1,4 +1,4 @@
-﻿namespace MyOnlineShop.Startup.Controllers
+﻿namespace MyOnlineShop.Web.Controllers
 {
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
@@ -6,7 +6,7 @@
     using MyOnlineShop.Application.Identity.Commands.LoginUser;
     using System;
     using System.Threading.Tasks;
-    using static MyOnlineShop.Startup.Constants;
+    using static MyOnlineShop.Web.Constants;
 
     public class IdentityController : BaseController
     {

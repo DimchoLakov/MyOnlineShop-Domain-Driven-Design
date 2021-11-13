@@ -1,4 +1,4 @@
-﻿namespace MyOnlineShop.Startup
+﻿namespace MyOnlineShop.Web
 {
     public class Constants
     {

@@ -1,4 +1,4 @@
-﻿namespace MyOnlineShop.Startup.Middlewares
+﻿namespace MyOnlineShop.Web.Middlewares
 {
     using Application.Common.Exceptions;
     using Domain.Common;

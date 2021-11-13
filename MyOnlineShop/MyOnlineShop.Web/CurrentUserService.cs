@@ -1,4 +1,4 @@
-﻿namespace MyOnlineShop.Startup
+﻿namespace MyOnlineShop.Web
 {
     using Microsoft.AspNetCore.Http;
     using MyOnlineShop.Application.Common.Contracts;

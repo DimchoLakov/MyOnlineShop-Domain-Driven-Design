@@ -1,18 +1,15 @@
 namespace MyOnlineShop.Startup
 {
-    using FluentValidation.AspNetCore;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using MyOnlineShop.Application;
-    using MyOnlineShop.Application.Common;
-    using MyOnlineShop.Application.Common.Contracts;
     using MyOnlineShop.Domain;
     using MyOnlineShop.Infrastructure;
-    using MyOnlineShop.Startup.Middlewares;
-    using MyOnlineShop.Startup.Services;
+    using MyOnlineShop.Web;
+    using MyOnlineShop.Web.Middlewares;
     using System.Net;
     using System.Threading.Tasks;
 
@@ -31,18 +28,7 @@ namespace MyOnlineShop.Startup
                 .AddDomain()
                 .AddApplication(this.Configuration)
                 .AddInfrastructure(this.Configuration)
-                .AddDatabaseDeveloperPageExceptionFilter()
-                .AddScoped<ICurrentUser, CurrentUserService>()
-                .AddScoped<ICurrentToken, CurrentTokenService>()
-                .AddTransient<JwtCookieAuthenticationMiddleware>()
-                .AddFluentValidation(validation => validation
-                    .RegisterValidatorsFromAssemblyContaining<Result>())
-                .AddRazorPages();
-
-            services
-                .AddControllersWithViews()
-                .AddNewtonsoftJson();
-            //.AddWeb();
+                .AddWeb();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -61,23 +47,23 @@ namespace MyOnlineShop.Startup
             app
                 .UseMiddleware<ValidationExceptionHandlerMiddleware>()
                 .UseStatusCodePages(async context =>
-                await Task.Run(() =>
-                {
-                    var request = context.HttpContext.Request;
-                    var response = context.HttpContext.Response;
-
-                    if (response.StatusCode == (int)HttpStatusCode.Unauthorized)
+                    await Task.Run(() =>
                     {
-                        response.Redirect($"/Identity/Login?returnUrl={request.Path}");
-                    }
+                        var request = context.HttpContext.Request;
+                        var response = context.HttpContext.Response;
 
-                    if (response.StatusCode == (int)HttpStatusCode.NotFound)
-                    {
-                        response.Redirect($"/Home/Error/?statusCode={response.StatusCode}");
-                    }
-                }))
+                        if (response.StatusCode == (int)HttpStatusCode.Unauthorized)
+                        {
+                            response.Redirect($"/Identity/Login?returnUrl={request.Path}");
+                        }
+
+                        if (response.StatusCode == (int)HttpStatusCode.NotFound)
+                        {
+                            response.Redirect($"/Home/Error/?statusCode={response.StatusCode}");
+                        }
+                    }))
                 .UseHttpsRedirection()
-                .UseStaticFiles()
+                .UseStaticFilesFromWebAssembly(env)
                 .UseRouting()
                 .UseMiddleware<JwtCookieAuthenticationMiddleware>()
                 .UseAuthentication()
