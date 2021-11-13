@@ -2,6 +2,8 @@
 {
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using MyOnlineShop.Application.Common.Contracts;
+    using MyOnlineShop.Application.Shopping.Commands.ClearCart;
     using MyOnlineShop.Application.Shopping.Queries.CartItems;
     using MyOnlineShop.Application.ShoppingGateway.Commands.AddProduct;
     using System.Threading.Tasks;
@@ -9,6 +11,13 @@
     [Authorize]
     public class ShoppingCartController : BaseController
     {
+        private readonly ICurrentUser currentUser;
+
+        public ShoppingCartController(ICurrentUser currentUser)
+        {
+            this.currentUser = currentUser;
+        }
+
         public async Task<IActionResult> Index()
         {
             var result = await this.Mediator.Send(new ShoppingCartItemsQuery());
@@ -24,33 +33,13 @@
             return this.Redirect($"/Products/Index/?page={fromPage}");
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Clear()
-        //{
-        //    try
-        //    {
-        //        await this.shoppingCartService.Clear(this.currentUserService.UserId);
+        [HttpPost]
+        public async Task<IActionResult> Clear()
+        {
+            await this.Mediator.Send(new ClearShoppingCartCommand(this.currentUser.UserId));
 
-        //        return this.Redirect(nameof(Index));
-        //    }
-        //    catch (Refit.ApiException apiEx)
-        //    {
-        //        if (apiEx.HasContent)
-        //        {
-        //            JsonConvert
-        //                .DeserializeObject<List<string>>(apiEx.Content)
-        //                .ForEach(error => this.ModelState.AddModelError(string.Empty, error));
-        //        }
-        //        else
-        //        {
-        //            this.ModelState.AddModelError(string.Empty, ErrorConstants.InternalServerErrorMessage);
-        //        }
-
-        //        this.HandleException(apiEx);
-        //    }
-
-        //    return this.Redirect(nameof(Index));
-        //}
+            return this.Redirect(nameof(Index));
+        }
 
         //[HttpPost]
         //public async Task<IActionResult> RemoveItem(int productId)

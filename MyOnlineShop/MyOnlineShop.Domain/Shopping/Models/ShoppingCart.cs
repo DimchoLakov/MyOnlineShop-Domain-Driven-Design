@@ -62,6 +62,11 @@
                 .FirstOrDefault(c => c.ProductId == productId);
         }
 
+        public void Clear()
+        {
+            this.cartItems.Clear();
+        }
+
         private void ValidateUserId(string userId)
         {
             Guard.AgainstEmptyString<InvalidShoppingCartException>(userId, nameof(this.UserId));
