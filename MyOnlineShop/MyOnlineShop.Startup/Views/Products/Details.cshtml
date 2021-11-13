@@ -39,6 +39,10 @@
         <form method="post" asp-area="" asp-controller="ShoppingCart" asp-action="AddProduct">
             <input type="hidden" name="ProductId" value="@Model.Id" />
             <input type="hidden" name="FromPage" value="@this.ViewData[Constants.ControllerViewData.FromPageKey]" />
+            <div class="form-group d-flex align-items-baseline">
+                <label class="mr-1" for="Quantity">Quantity</label>
+                <input class="form-control text-center" type="number" id="Quantity" name="Quantity" value="1" min="1" placeholder="Quantity" />
+            </div>
             <button class="btn btn-success w-100">Add to Trolley</button>
         </form>
     </div>

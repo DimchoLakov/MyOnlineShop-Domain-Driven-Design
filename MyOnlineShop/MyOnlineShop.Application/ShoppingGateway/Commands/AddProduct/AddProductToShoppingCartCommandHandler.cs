@@ -16,26 +16,22 @@
         private readonly IProductDomainRepository productDomainRepository;
         private readonly IShoppingCartDomainRepository shoppingCartDomainRepository;
         private readonly IShoppingCartFactory shoppingCartFactory;
-        private readonly ICurrentUser currentUser;
 
         public AddProductToShoppingCartCommandHandler(
             IProductDomainRepository productDomainRepository,
             IShoppingCartDomainRepository shoppingCartDomainRepository,
-            IShoppingCartFactory shoppingCartFactory,
-            ICurrentUser currentUser)
+            IShoppingCartFactory shoppingCartFactory)
         {
             this.productDomainRepository = productDomainRepository;
             this.shoppingCartDomainRepository = shoppingCartDomainRepository;
             this.shoppingCartFactory = shoppingCartFactory;
-            this.currentUser = currentUser;
         }
 
         public async Task<Result> Handle(
             AddProductToShoppingCartCommand request,
             CancellationToken cancellationToken)
         {
-            string currentUserId = this.currentUser.UserId;
-            if (string.IsNullOrEmpty(currentUserId))
+            if (string.IsNullOrEmpty(request.UserId))
             {
                 return Result.Failure("User not authenticated!");
             }
@@ -46,12 +42,13 @@
                 throw new NotFoundException(nameof(product), request.ProductId);
             }
 
-            var shoppingCart = await this.shoppingCartDomainRepository.FindWithCartItems(currentUserId, cancellationToken);
+            var shoppingCart = await this.shoppingCartDomainRepository
+                                         .FindWithCartItems(request.UserId, cancellationToken);
             if (shoppingCart == null)
             {
                 shoppingCart = this.shoppingCartFactory
-                    .WithUserId(currentUserId)
-                    .Build();
+                                   .WithUserId(request.UserId)
+                                   .Build();
             }
 
             var cartItem = shoppingCart.GetCartItem(request.ProductId);
@@ -59,7 +56,7 @@
             {
                 shoppingCart.AddCartItem(
                                 product.Id,
-                                quantity: 1,
+                                quantity: request.Quantity,
                                 product.Name,
                                 product.Weight,
                                 product.Price,
@@ -68,7 +65,7 @@
             }
             else
             {
-                cartItem.UpdateQuantity(1);
+                cartItem.UpdateQuantity(request.Quantity);
             }
 
             await this.shoppingCartDomainRepository.SaveAsync(shoppingCart, cancellationToken);

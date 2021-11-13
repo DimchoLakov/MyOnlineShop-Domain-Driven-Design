@@ -26,9 +26,9 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddProduct(int productId, int? fromPage = 1)
+        public async Task<IActionResult> AddProduct(int productId, int quantity, int? fromPage = 1)
         {
-            await this.Mediator.Send(new AddProductToShoppingCartCommand(productId));
+            await this.Mediator.Send(new AddProductToShoppingCartCommand(productId, this.currentUser.UserId, quantity));
 
             return this.Redirect($"/Products/Index/?page={fromPage}");
         }
