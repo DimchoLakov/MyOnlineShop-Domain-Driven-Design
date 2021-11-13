@@ -25,7 +25,7 @@
                 </form>
             </div>
         }
-        <p><b>Total:</b> $@Model.Count()</p>
+        <p><b>Total:</b> $@Model.Sum(c => c.Price)</p>
     </div>
     <div class="col-md-12">
         @if (Model.Any())
