@@ -1,5 +1,6 @@
 ﻿namespace MyOnlineShop.Domain.Catalog.Models.Products
 {
+    using MyOnlineShop.Domain.Catalog.Events;
     using MyOnlineShop.Domain.Catalog.Exceptions.Products;
     using MyOnlineShop.Domain.Catalog.Models.Categories;
     using MyOnlineShop.Domain.Common;
@@ -186,6 +187,8 @@
 
             this.DateUpdated = DateTime.Now;
 
+            this.RaiseEvent(new ProductNameUpdatedEvent(this.Id, this.Name));
+
             return this;
         }
 
@@ -195,6 +198,8 @@
             this.Description = description;
 
             this.DateUpdated = DateTime.Now;
+
+            this.RaiseEvent(new ProductDescriptionUpdatedEvent(this.Id, this.Description));
 
             return this;
         }
@@ -206,6 +211,8 @@
 
             this.DateUpdated = DateTime.Now;
 
+            this.RaiseEvent(new ProductPriceUpdatedEvent(this.Id, this.Price));
+
             return this;
         }
 
@@ -215,6 +222,8 @@
             this.Weight = weight;
 
             this.DateUpdated = DateTime.Now;
+
+            this.RaiseEvent(new ProductWeightUpdatedEvent(this.Id, this.Weight));
 
             return this;
         }
@@ -235,6 +244,8 @@
             this.ImageUrl = imageUrl;
 
             this.DateUpdated = DateTime.Now;
+
+            this.RaiseEvent(new ProductImageUrlUpdatedEvent(this.Id, this.ImageUrl));
 
             return this;
         }

@@ -13,7 +13,6 @@
     <Folder Include="Ordering\Repositories\" />
     <Folder Include="Ordering\Specifications\" />
     <Folder Include="Payments\" />
-    <Folder Include="Catalog\Events\" />
   </ItemGroup>
 
   <ItemGroup>

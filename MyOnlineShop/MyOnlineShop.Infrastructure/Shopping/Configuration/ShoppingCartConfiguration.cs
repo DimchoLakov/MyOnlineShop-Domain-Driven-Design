@@ -22,7 +22,8 @@
             builder
                 .HasMany(s => s.CartItems)
                 .WithOne()
-                .HasForeignKey("ShoppingCartId");
+                .HasForeignKey("ShoppingCartId")
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

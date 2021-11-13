@@ -20,8 +20,18 @@
 
         Task<bool> Delete(string userId, CancellationToken cancellationToken = default);
 
-        Task<IEnumerable<ShoppingCartItem>> GetCartItems(int shoppingCartId, CancellationToken cancellationToken = default!);
+        Task<IEnumerable<ShoppingCartItem>> GetCartItems(int shoppingCartId, CancellationToken cancellationToken = default);
 
-        Task<IEnumerable<ShoppingCartItem>> GetCartItems(string userId, CancellationToken cancellationToken = default!);
+        Task<IEnumerable<ShoppingCartItem>> GetCartItems(string userId, CancellationToken cancellationToken = default);
+
+        Task<int> UpdateCartItemsWithProductName(int productId, string newProductName, CancellationToken cancellationToken = default);
+
+        Task<int> UpdateCartItemsWithProductDescription(int productId, string newProductDescription, CancellationToken cancellationToken = default);
+
+        Task<int> UpdateCartItemsWithProductPrice(int productId, decimal newProductPrice, CancellationToken cancellationToken = default);
+
+        Task<int> UpdateCartItemsWithProductWeight(int productId, double newProductWeight, CancellationToken cancellationToken = default);
+
+        Task<int> UpdateCartItemsWithProductImageUrl(int productId, string newProductImageUrl, CancellationToken cancellationToken = default);
     }
 }

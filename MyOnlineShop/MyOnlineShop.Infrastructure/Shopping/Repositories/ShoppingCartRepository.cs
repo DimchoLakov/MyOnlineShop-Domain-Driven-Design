@@ -18,7 +18,7 @@
         private readonly IMapper mapper;
 
         public ShoppingCartRepository(
-            IShoppingDbContext dbContext, 
+            IShoppingDbContext dbContext,
             IMapper mapper)
             : base(dbContext)
         {
@@ -82,7 +82,9 @@
                        .FirstOrDefaultAsync(s => s.UserId == userId, cancellationToken);
         }
 
-        public async Task<ShoppingCart> FindWithCartItems(int id, CancellationToken cancellationToken = default)
+        public async Task<ShoppingCart> FindWithCartItems(
+            int id,
+            CancellationToken cancellationToken = default)
         {
             return await this.Data
                        .ShoppingCarts
@@ -90,7 +92,9 @@
                        .FirstOrDefaultAsync(s => s.Id == id, cancellationToken);
         }
 
-        public async Task<ShoppingCart> FindWithCartItems(string userId, CancellationToken cancellationToken = default)
+        public async Task<ShoppingCart> FindWithCartItems(
+            string userId,
+            CancellationToken cancellationToken = default)
         {
             return await this.Data
                        .ShoppingCarts
@@ -132,6 +136,146 @@
             return await this.mapper
                 .ProjectTo<TOutputModel>(cartItems)
                 .ToListAsync(cancellationToken);
+        }
+
+        public async Task<int> UpdateCartItemsWithProductDescription(
+            int productId,
+            string newProductDescription,
+            CancellationToken cancellationToken = default)
+        {
+            var cartItemsToUpdate = await this.Data
+                                              .ShoppingCartItems
+                                              .Where(c => c.ProductId == productId)
+                                              .ToListAsync(cancellationToken);
+
+            foreach (var cartItem in cartItemsToUpdate)
+            {
+                cartItem.UpdateProductDescription(newProductDescription);
+            }
+
+            if (cartItemsToUpdate.Any())
+            {
+                this.Data
+                    .ShoppingCartItems
+                    .UpdateRange(cartItemsToUpdate);
+
+                return await this.Data
+                                 .SaveChangesAsync(cancellationToken);
+            }
+
+            return 0;
+        }
+
+        public async Task<int> UpdateCartItemsWithProductName(
+            int productId,
+            string newProductName,
+            CancellationToken cancellationToken = default)
+        {
+            var cartItemsToUpdate = await this.Data
+                                              .ShoppingCartItems
+                                              .Where(c => c.ProductId == productId)
+                                              .ToListAsync(cancellationToken);
+
+            foreach (var cartItem in cartItemsToUpdate)
+            {
+                cartItem.UpdateProductName(newProductName);
+            }
+
+            if (cartItemsToUpdate.Any())
+            {
+                this.Data
+                    .ShoppingCartItems
+                    .UpdateRange(cartItemsToUpdate);
+
+                return await this.Data
+                                 .SaveChangesAsync(cancellationToken);
+            }
+
+            return 0;
+        }
+
+        public async Task<int> UpdateCartItemsWithProductPrice(
+            int productId,
+            decimal newProductPrice,
+            CancellationToken cancellationToken = default)
+        {
+            var cartItemsToUpdate = await this.Data
+                                              .ShoppingCartItems
+                                              .Where(c => c.ProductId == productId)
+                                              .ToListAsync(cancellationToken);
+
+            foreach (var cartItem in cartItemsToUpdate)
+            {
+                cartItem.UpdateProductPrice(newProductPrice);
+            }
+
+            if (cartItemsToUpdate.Any())
+            {
+                this.Data
+                    .ShoppingCartItems
+                    .UpdateRange(cartItemsToUpdate);
+
+                return await this.Data
+                                 .SaveChangesAsync(cancellationToken);
+            }
+
+            return 0;
+        }
+
+        public async Task<int> UpdateCartItemsWithProductWeight(
+            int productId,
+            double newProductWeight,
+            CancellationToken cancellationToken = default)
+        {
+            var cartItemsToUpdate = await this.Data
+                                              .ShoppingCartItems
+                                              .Where(c => c.ProductId == productId)
+                                              .ToListAsync(cancellationToken);
+
+            foreach (var cartItem in cartItemsToUpdate)
+            {
+                cartItem.UpdateProductWeight(newProductWeight);
+            }
+
+            if (cartItemsToUpdate.Any())
+            {
+                this.Data
+                    .ShoppingCartItems
+                    .UpdateRange(cartItemsToUpdate);
+
+                return await this.Data
+                                 .SaveChangesAsync(cancellationToken);
+            }
+
+            return 0;
+        }
+
+        public async Task<int> UpdateCartItemsWithProductImageUrl(
+            int productId, 
+            string newProductImageUrl, 
+            CancellationToken cancellationToken = default)
+        {
+            var cartItemsToUpdate = await this.Data
+                                              .ShoppingCartItems
+                                              .Where(c => c.ProductId == productId)
+                                              .ToListAsync(cancellationToken);
+
+            foreach (var cartItem in cartItemsToUpdate)
+            {
+                cartItem.UpdateProductImageUrl(newProductImageUrl);
+            }
+
+            if (cartItemsToUpdate.Any())
+            {
+                this.Data
+                    .ShoppingCartItems
+                    .UpdateRange(cartItemsToUpdate);
+
+                return await this.Data
+                                 .SaveChangesAsync(cancellationToken);
+            }
+
+            return 0;
         }
     }
 }

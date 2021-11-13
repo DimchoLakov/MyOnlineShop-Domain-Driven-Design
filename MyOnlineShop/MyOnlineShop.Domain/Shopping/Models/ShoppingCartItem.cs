@@ -47,9 +47,51 @@
 
         public decimal Price => this.ProductPrice * this.Quantity;
 
-        public void UpdateQuantity(int quantityToAdd)
+        public ShoppingCartItem UpdateQuantity(int quantityToAdd)
         {
             this.Quantity += quantityToAdd;
+
+            return this;
+        }
+
+        public ShoppingCartItem UpdateProductName(string newProductName)
+        {
+            this.ValidateProductName(newProductName);
+            this.ProductName = newProductName;
+
+            return this;
+        }
+
+        public ShoppingCartItem UpdateProductDescription(string newProductDescription)
+        {
+            this.ValidateProductDescription(newProductDescription);
+            this.ProductDescription = newProductDescription;
+
+            return this;
+        }
+
+        public ShoppingCartItem UpdateProductPrice(decimal newProductPrice)
+        {
+            this.ValidateProductPrice(newProductPrice);
+            this.ProductPrice = newProductPrice;
+
+            return this;
+        }
+
+        public ShoppingCartItem UpdateProductWeight(double newProductWeigh)
+        {
+            this.ValidateProductWeight(newProductWeigh);
+            this.ProductWeight = newProductWeigh;
+
+            return this;
+        }
+
+        public ShoppingCartItem UpdateProductImageUrl(string newProductImageUrl)
+        {
+            this.ValidateProductImageUrl(newProductImageUrl);
+            this.ProductImageUrl = newProductImageUrl;
+
+            return this;
         }
 
         private void Validate(
