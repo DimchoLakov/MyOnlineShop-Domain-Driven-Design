@@ -63,11 +63,12 @@ namespace MyOnlineShop.Startup
                 .UseStatusCodePages(async context =>
                 await Task.Run(() =>
                 {
+                    var request = context.HttpContext.Request;
                     var response = context.HttpContext.Response;
 
                     if (response.StatusCode == (int)HttpStatusCode.Unauthorized)
                     {
-                        response.Redirect("/Identity/Login");
+                        response.Redirect($"/Identity/Login?returnUrl={request.Path}");
                     }
 
                     if (response.StatusCode == (int)HttpStatusCode.NotFound)

@@ -16,7 +16,7 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginUserCommand loginUserCommand)
+        public async Task<IActionResult> Login(LoginUserCommand loginUserCommand, string returnUrl = "")
         {
             var result = await this.Mediator.Send(loginUserCommand);
             if (!result.Succeeded)
@@ -39,6 +39,12 @@
                         MaxAge = TimeSpan.FromDays(1)
                     });
 
+            if (!string.IsNullOrWhiteSpace(returnUrl) &&
+                Url.IsLocalUrl(returnUrl))
+            {
+                return this.Redirect(returnUrl);
+            }
+
             return this.Redirect(HomeUrl);
         }
 
@@ -48,13 +54,19 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(CreateUserCommand createUserCommand)
+        public async Task<IActionResult> Register(CreateUserCommand createUserCommand, string returnUrl = "")
         {
             var result = await this.Mediator.Send(createUserCommand);
             if (!result.Succeeded)
             {
                 this.ModelState.AddModelError(string.Empty, string.Join(Environment.NewLine, result.Errors));
                 return this.View(createUserCommand);
+            }
+
+            if (!string.IsNullOrWhiteSpace(returnUrl) &&
+                Url.IsLocalUrl(returnUrl))
+            {
+                return this.Redirect(returnUrl);
             }
 
             return this.Redirect(HomeUrl);

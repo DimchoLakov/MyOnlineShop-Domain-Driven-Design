@@ -1,14 +1,14 @@
 ﻿@model CreateUserCommand
-
 @{
     ViewData["Title"] = "Register";
+    var returnUrl = Context.Request.Query["returnUrl"];
 }
 
 <h1>@ViewData["Title"]</h1>
 
 <div class="row">
     <div class="col-md-4">
-        <form method="post" asp-area="" asp-controller="Identity" asp-action="Register">
+        <form method="post" asp-area="" asp-controller="Identity" asp-action="Register" asp-route-returnUrl="@returnUrl">
             <h4>Create a new account.</h4>
             <hr />
             <div asp-validation-summary="All" class="text-danger"></div>
