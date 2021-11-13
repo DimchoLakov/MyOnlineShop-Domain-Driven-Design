@@ -15,9 +15,14 @@ namespace MyOnlineShop.Startup
 
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly IWebHostEnvironment webHostEnvironment;
+
+        public Startup(
+            IConfiguration configuration, 
+            IWebHostEnvironment webHostEnvironment)
         {
             this.Configuration = configuration;
+            this.webHostEnvironment = webHostEnvironment;
         }
 
         public IConfiguration Configuration { get; }
@@ -28,7 +33,7 @@ namespace MyOnlineShop.Startup
                 .AddDomain()
                 .AddApplication(this.Configuration)
                 .AddInfrastructure(this.Configuration)
-                .AddWeb();
+                .AddWeb(this.webHostEnvironment);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
