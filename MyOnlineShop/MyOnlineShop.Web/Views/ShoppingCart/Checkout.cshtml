@@ -1,0 +1,68 @@
+﻿@model ShoppingCartCheckoutCommand
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        @foreach (var cartItem in Model.CartItems)
+        {
+            <div class="cart-item mb-2 d-md-inline-block">
+                <p>@cartItem.ProductName</p>
+                <p>$@cartItem.ProductPrice x @cartItem.Quantity = $@(cartItem.ProductPrice * cartItem.Quantity)</p>
+            </div>
+        }
+        <p><b>Total:</b> $@Model.CartItems.Sum(c => c.Price)</p>
+
+        <form method="post" asp-area="" asp-controller="ShoppingCart" asp-action="Checkout" class="mb-2">
+            <input asp-for="@Model.UserId" type="hidden" />
+            <div class="form-group row">
+                <label asp-for="@Model.FirstName" class="col-md-2 col-form-label">First Name</label>
+                <div class="col-md-6">
+                    <input asp-for="@Model.FirstName" class="form-control" placeholder="First Name" required readonly>
+                    <span asp-validation-for="@Model.FirstName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="@Model.LastName" class="col-md-2 col-form-label">Last Name</label>
+                <div class="col-md-6">
+                    <input asp-for="@Model.LastName" class="form-control" placeholder="Last Name" required readonly>
+                    <span asp-validation-for="@Model.LastName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="@Model.AddressInputModel.AddressLine" class="col-md-2 col-form-label"></label>
+                <div class="col-md-6">
+                    <input asp-for="@Model.AddressInputModel.AddressLine" class="form-control" placeholder="Address line..." required>
+                    <span asp-validation-for="@Model.AddressInputModel.AddressLine" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="@Model.AddressInputModel.PostCode" class="col-md-2 col-form-label"></label>
+                <div class="col-md-6">
+                    <input asp-for="@Model.AddressInputModel.PostCode" class="form-control" placeholder="Post Code..." required>
+                    <span asp-validation-for="@Model.AddressInputModel.PostCode" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="@Model.AddressInputModel.Town" class="col-md-2 col-form-label"></label>
+                <div class="col-md-6">
+                    <input asp-for="@Model.AddressInputModel.Town" class="form-control" placeholder="Town..." required>
+                    <span asp-validation-for="@Model.AddressInputModel.Town" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="@Model.AddressInputModel.Country" class="col-md-2 col-form-label"></label>
+                <div class="col-md-6">
+                    <input asp-for="@Model.AddressInputModel.Country" class="form-control" placeholder="Country..." required>
+                    <span asp-validation-for="@Model.AddressInputModel.Country" class="text-danger"></span>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success text-uppercase">Place Order</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

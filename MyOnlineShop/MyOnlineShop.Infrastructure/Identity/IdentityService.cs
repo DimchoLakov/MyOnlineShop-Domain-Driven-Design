@@ -83,5 +83,11 @@
                 ? Result<IUser>.SuccessWith(user)
                 : Result<IUser>.Failure(errors);
         }
+
+        public async Task<IUser> GetUserById(string userId)
+        {
+            return await this.userManager
+                             .FindByIdAsync(userId);
+        }
     }
 }

@@ -7,6 +7,8 @@
     using MyOnlineShop.Application.Shopping.Commands.ClearCart;
     using MyOnlineShop.Application.Shopping.Queries.CartItems;
     using MyOnlineShop.Application.ShoppingGateway.Commands.AddProduct;
+    using MyOnlineShop.Application.ShoppingGateway.Commands.Checkout;
+    using MyOnlineShop.Application.ShoppingGateway.Queries.Checkout;
     using System.Threading.Tasks;
 
     [Authorize]
@@ -50,64 +52,24 @@
             return this.Redirect(nameof(Index));
         }
 
-        //public async Task<IActionResult> Checkout()
-        //{
-        //    try
-        //    {
-        //        var shoppingCartOrderWrapperViewModel = await this.shoppingCartGatewayService.GetCheckout();
+        public async Task<IActionResult> Checkout()
+        {
+            var shoppingCartChechoutCommand = await this.Mediator.Send(new ShoppingCartCheckoutQuery(this.currentUser.UserId));
 
-        //        return this.View(shoppingCartOrderWrapperViewModel);
-        //    }
-        //    catch (Refit.ApiException apiEx)
-        //    {
-        //        if (apiEx.HasContent)
-        //        {
-        //            JsonConvert
-        //                .DeserializeObject<List<string>>(apiEx.Content)
-        //                .ForEach(error => this.ModelState.AddModelError(string.Empty, error));
-        //        }
-        //        else
-        //        {
-        //            this.ModelState.AddModelError(string.Empty, ErrorConstants.InternalServerErrorMessage);
-        //        }
+            return this.View(shoppingCartChechoutCommand);
+        }
 
-        //        this.HandleException(apiEx);
-        //    }
+        [HttpPost]
+        public async Task<IActionResult> Checkout(ShoppingCartCheckoutCommand shoppingCartCheckoutCommand)
+        {
+            await this.Mediator.Send(shoppingCartCheckoutCommand);
 
-        //    return this.View();
-        //}
+            return this.RedirectToAction(nameof(this.Success));
+        }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Checkout(OrderAddressViewModel orderAddressViewModel)
-        //{
-        //    try
-        //    {
-        //        await this.shoppingCartGatewayService.Checkout(orderAddressViewModel);
-
-        //        return this.RedirectToAction(nameof(Success));
-        //    }
-        //    catch (Refit.ApiException apiEx)
-        //    {
-        //        if (apiEx.HasContent)
-        //        {
-        //            JsonConvert
-        //                .DeserializeObject<List<string>>(apiEx.Content)
-        //                .ForEach(error => this.ModelState.AddModelError(string.Empty, error));
-        //        }
-        //        else
-        //        {
-        //            this.ModelState.AddModelError(string.Empty, ErrorConstants.InternalServerErrorMessage);
-        //        }
-
-        //        this.HandleException(apiEx);
-        //    }
-
-        //    return this.View();
-        //}
-
-        //public IActionResult Success()
-        //{
-        //    return this.View("Success", ShoppingCartConstants.SuccessMessage);
-        //}
+        public IActionResult Success()
+        {
+            return this.View();
+        }
     }
 }

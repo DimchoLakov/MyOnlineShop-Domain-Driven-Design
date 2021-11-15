@@ -19,4 +19,8 @@
     <ProjectReference Include="..\MyOnlineShop.Domain\MyOnlineShop.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Common\InputOutputModels\Output\" />
+  </ItemGroup>
+
 </Project>

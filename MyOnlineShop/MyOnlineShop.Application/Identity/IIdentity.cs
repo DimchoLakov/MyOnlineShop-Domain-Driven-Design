@@ -13,5 +13,7 @@
         Task<Result<string>> Login(UserInputModel userInput);
 
         Task<Result> ChangePassword(ChangePasswordInputModel changePasswordInput);
+
+        Task<IUser> GetUserById(string userId);
     }
 }
