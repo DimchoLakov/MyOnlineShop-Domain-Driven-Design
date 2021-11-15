@@ -8,11 +8,7 @@
 
   <ItemGroup>
     <Folder Include="Ordering\Events\" />
-    <Folder Include="Ordering\Exceptions\" />
-    <Folder Include="Ordering\Factories\" />
-    <Folder Include="Ordering\Repositories\" />
     <Folder Include="Ordering\Specifications\" />
-    <Folder Include="Payments\" />
   </ItemGroup>
 
   <ItemGroup>
