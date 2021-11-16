@@ -1,8 +1,19 @@
-﻿@{
+﻿@inject ICurrentUser currentUser
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome to My Online Shop</h1>
-    <h3>Browse <a asp-area="" asp-controller="Products" asp-action="Index">All Products</a></h3>
-</div>
+@if (this.currentUser.IsAdministrator)
+{
+    <div class="text-center">
+        <h1 class="display-4">Welcome, admin!</h1>
+        <h3>Manage <a asp-area="Admin" asp-controller="Products" asp-action="Index">All Products</a></h3>
+    </div>
+}
+else
+{
+    <div class="text-center">
+        <h1 class="display-4">Welcome to My Online Shop</h1>
+        <h3>Browse <a asp-area="" asp-controller="Products" asp-action="Index">All Products</a></h3>
+    </div>
+}
