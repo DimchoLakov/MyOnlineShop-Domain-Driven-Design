@@ -9,10 +9,12 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     @if (currentUser.IsAdministrator)
     {
+        <link rel="stylesheet" href="~/css/themes/darkly/bootstrap.css" />
         <link rel="stylesheet" href="~/css/admin.site.css" />
     }
     else
     {
+        <link rel="stylesheet" href="~/css/themes/cosmo/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
     }
 </head>

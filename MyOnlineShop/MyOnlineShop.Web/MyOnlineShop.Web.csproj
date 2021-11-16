@@ -27,4 +27,8 @@
     <ProjectReference Include="..\MyOnlineShop.Application\MyOnlineShop.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\css\themes\darkly\" />
+  </ItemGroup>
+
 </Project>
