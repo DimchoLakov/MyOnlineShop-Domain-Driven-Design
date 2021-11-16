@@ -1,0 +1,36 @@
+﻿@model IEnumerable<MyOrderOutputModel>
+@{
+    ViewData["Title"] = "My Orders";
+}
+
+@{
+    int orderNumber = 1;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>My Orders</h3>
+    </div>
+    @if (!Model.Any())
+    {
+        <p class="bg-info d-inline-block text-white p-1">You don't have any orders.</p>
+    }
+    else
+    {
+
+        @foreach (var order in Model)
+        {
+            <div class="col-md-auto order-item mr-2 mb-2">
+                <a asp-area="" asp-controller="Orders" asp-action="Details" asp-route-id="@order.Id">
+                    <p>#@orderNumber</p>
+                    <p>@order.OrderDate.ToString("f")</p>
+                    <p>Items Count - @order.OrderItemsCount</p>
+                    <p>Total Price - @order.TotalPrice.ToString("C")</p>
+                </a>
+            </div>
+            {
+                orderNumber++;
+            }
+        }
+    }
+</div>

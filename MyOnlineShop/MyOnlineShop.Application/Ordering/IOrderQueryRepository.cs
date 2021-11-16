@@ -8,6 +8,8 @@
 
     public interface IOrderQueryRepository : IQueryRepository<Order>
     {
-        Task<IEnumerable<TOutputModel>> GetOrderItemsById<TOutputModel>(int id, CancellationToken cancellationToken = default!);
+        Task<IEnumerable<TOutputModel>> GetOrdersByUserId<TOutputModel>(string userId, CancellationToken cancellationToken = default!);
+
+        Task<IEnumerable<TOutputModel>> GetOrderItemsByOrderId<TOutputModel>(int id, CancellationToken cancellationToken = default!);
     }
 }

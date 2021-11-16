@@ -22,7 +22,6 @@
   <ItemGroup>
     <Folder Include="Common\InputOutputModels\Output\" />
     <Folder Include="Ordering\Commands\" />
-    <Folder Include="Ordering\Queries\" />
   </ItemGroup>
 
 </Project>
