@@ -2,7 +2,9 @@
 {
     using AutoMapper;
     using Microsoft.EntityFrameworkCore;
+    using MyOnlineShop.Application.Common.Exceptions;
     using MyOnlineShop.Application.Ordering;
+    using MyOnlineShop.Application.Ordering.Queries.Details.Models;
     using MyOnlineShop.Domain.Ordering.Models.Orders;
     using MyOnlineShop.Domain.Ordering.Repositories;
     using MyOnlineShop.Infrastructure.Common.Persistance;
@@ -68,6 +70,29 @@
 
             return this.mapper
                        .Map<IEnumerable<Order>, IEnumerable<TOutputModel>>(orders);
+        }
+
+        public async Task<OrderDetailsOutputModel> GetDetailsByIdWithOrderItems(
+            int id, 
+            CancellationToken cancellationToken = default)
+        {
+            var order = this.All()
+                             .Include(o => o.OrderItems)
+                             .Where(o => o.Id == id)
+                             .AsEnumerable()
+                             .FirstOrDefault();
+
+            if (order == null)
+            {
+                throw new NotFoundException(nameof(order), id);
+            }
+
+            var orderDetails = this.mapper
+                                   .Map<Order, OrderDetailsOutputModel>(order);
+
+            orderDetails.OrderItems = await this.GetOrderItemsByOrderId<OrderItemDetailsOutputModel>(id, cancellationToken);
+
+            return orderDetails;
         }
     }
 }

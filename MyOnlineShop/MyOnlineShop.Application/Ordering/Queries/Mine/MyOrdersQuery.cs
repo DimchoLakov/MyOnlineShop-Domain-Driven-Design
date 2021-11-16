@@ -1,9 +1,10 @@
 ﻿namespace MyOnlineShop.Application.Ordering.Queries.Mine
 {
     using MediatR;
+    using MyOnlineShop.Application.Ordering.Queries.Common;
     using System.Collections.Generic;
 
-    public class MyOrdersQuery : IRequest<IEnumerable<MyOrderOutputModel>>
+    public class MyOrdersQuery : IRequest<IEnumerable<OrderOutputModel>>
     {
         public MyOrdersQuery(string userId)
         {

@@ -1,4 +1,4 @@
-﻿namespace MyOnlineShop.Application.Ordering.Queries.Mine
+﻿namespace MyOnlineShop.Application.Ordering.Queries.Common
 {
     using AutoMapper;
     using MyOnlineShop.Application.Common.Mapping;
@@ -6,7 +6,7 @@
     using System;
     using System.Linq;
 
-    public class MyOrderOutputModel : IMapFrom<Order>
+    public class OrderOutputModel : IMapFrom<Order>
     {
         public int Id { get; set; }
 
@@ -16,10 +16,10 @@
 
         public decimal TotalPrice { get; set; }
 
-        public void Mapping(Profile profile)
+        public virtual void Mapping(Profile profile)
         {
             profile
-                .CreateMap<Order, MyOrderOutputModel>()
+                .CreateMap<Order, OrderOutputModel>()
                 .ForMember(
                     dest => dest.OrderItemsCount,
                     options => options.MapFrom(
