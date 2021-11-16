@@ -6,8 +6,16 @@
 <div class="row">
     <div class="col-md-12">
         <h3>Order Details</h3>
+    </div>
+    <div class="col-md-6">
         <p><b>Order Date:</b> @Model.OrderDate.ToString("f")</p>
         <p><b>Order Total:</b> $@Model.TotalPrice.ToString("N2")</p>
+    </div>
+    <div class="col-md-6">
+        <p><b>Address Line:</b> @Model.Address.AddressLine</p>
+        <p><b>Town:</b> @Model.Address.Town</p>
+        <p><b>Post Code:</b> @Model.Address.PostCode</p>
+        <p><b>Country:</b> @Model.Address.Country</p>
     </div>
     @foreach (var orderItemDetails in Model.OrderItems)
     {
